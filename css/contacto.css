@@ -1,0 +1,30 @@
+:root {
+  /* Paleta — inspirada en la tierra y el maíz salvadoreño */
+  --color-primary: #b8341b;
+  --color-primary-dark: #8c2412;
+  --color-primary-light: #d9543a;
+  --color-accent: #e0a82e;
+  --color-accent-dark: #b8861f;
+  --color-cream: #fdf6ec;
+  --color-cream-dark: #f3e7d0;
+  --color-dark: #2b2118;
+  --color-muted: #6b5d4f;
+  --color-white: #ffffff;
+  --color-line: rgba(43, 33, 24, 0.12);
+
+    /* Tipografía */
+  --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif;
+}
+
+/*Section del header*/
+.section__head{
+    background-color: var(--color-primary);
+}
+
+.section__head p:first-child{
+    text-transform: uppercase;
+    color: var(--color-white);
+    
+}
