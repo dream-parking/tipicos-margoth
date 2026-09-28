@@ -1,24 +1,29 @@
 /* global.css — Tokens, base, layout, header, footer y componentes compartidos */
 
-/* Design tokens */
+/* Design tokens — Café Santa Cruz (design.md) */
 :root {
-  /* Paleta — inspirada en la tierra y el maíz salvadoreño */
-  --color-primary: #b8341b;
-  --color-primary-dark: #8c2412;
-  --color-primary-light: #d9543a;
-  --color-accent: #e0a82e;
-  --color-accent-dark: #b8861f;
-  --color-cream: #fdf6ec;
-  --color-cream-dark: #f3e7d0;
-  --color-dark: #2b2118;
-  --color-muted: #6b5d4f;
+  /* Paleta oficial */
+  --color-primary: #00a3e0;        /* Azul Cerúleo / Lago de Ilopango */
+  --color-primary-dark: #007fb0;
+  --color-primary-light: #4dbbe9;
+  --color-secondary: #0d2240;      /* Azul Marino Real — textos y contraste */
+  --color-secondary-dark: #081729;
+  --color-green: #2e5b38;          /* Verde Bosque / Palma */
+  --color-green-dark: #1f4027;
+  --color-accent: #8b5a2b;         /* Madera / Café Tostado */
+  --color-accent-dark: #6d4520;
+  --color-cream: #ffffff;          /* Blanco puro */
+  --color-cream-dark: #f8f9fa;     /* Marfil */
+  --color-dark: #0d2240;           /* Texto principal = azul marino */
+  --color-muted: #5a6b7a;
   --color-white: #ffffff;
-  --color-line: rgba(43, 33, 24, 0.12);
+  --color-line: rgba(13, 34, 64, 0.12);
 
   /* Tipografía */
   --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
-  --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Helvetica, Arial, sans-serif;
+  --font-brand: "Lobster", "Playfair Display", cursive;
+  --font-body: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Helvetica, Arial, sans-serif;
 
   /* Escala tipográfica */
   --fs-300: 0.875rem;
@@ -41,9 +46,9 @@
   --radius-sm: 6px;
   --radius-md: 12px;
   --radius-lg: 20px;
-  --shadow-sm: 0 1px 3px rgba(43, 33, 24, 0.08);
-  --shadow-md: 0 6px 18px rgba(43, 33, 24, 0.12);
-  --shadow-lg: 0 18px 40px rgba(43, 33, 24, 0.18);
+  --shadow-sm: 0 1px 3px rgba(13, 34, 64, 0.08);
+  --shadow-md: 0 6px 18px rgba(13, 34, 64, 0.12);
+  --shadow-lg: 0 18px 40px rgba(13, 34, 64, 0.18);
 
   /* Layout */
   --container-max: 1180px;
@@ -66,7 +71,7 @@ h4 {
   font-family: var(--font-display);
   font-weight: 700;
   line-height: 1.15;
-  color: var(--color-dark);
+  color: var(--color-secondary);
 }
 
 p {
@@ -117,7 +122,7 @@ img {
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--color-primary);
+  color: var(--color-accent);
   margin-bottom: var(--space-sm);
 }
 
@@ -136,7 +141,7 @@ img {
   align-items: center;
   justify-content: center;
   gap: var(--space-xs);
-  padding: 0.85rem 1.6rem;
+  padding: 0.8rem 1.6rem;
   font-weight: 600;
   font-size: var(--fs-400);
   border-radius: 999px;
@@ -156,6 +161,28 @@ img {
   box-shadow: var(--shadow-md);
 }
 
+.btn--secondary {
+  background-color: var(--color-secondary);
+  color: var(--color-white);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn--secondary:hover {
+  background-color: var(--color-secondary-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn--accent {
+  background-color: var(--color-accent);
+  color: var(--color-white);
+}
+
+.btn--accent:hover {
+  background-color: var(--color-accent-dark);
+  transform: translateY(-2px);
+}
+
 .btn--ghost {
   background-color: transparent;
   color: var(--color-white);
@@ -167,16 +194,6 @@ img {
   transform: translateY(-2px);
 }
 
-.btn--accent {
-  background-color: var(--color-accent);
-  color: var(--color-dark);
-}
-
-.btn--accent:hover {
-  background-color: var(--color-accent-dark);
-  transform: translateY(-2px);
-}
-
 /* Header / Navegación */
 .site-header {
   position: sticky;
@@ -185,7 +202,7 @@ img {
   height: var(--header-h);
   display: flex;
   align-items: center;
-  background-color: rgba(253, 246, 236, 0.92);
+  background-color: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--color-line);
 }
@@ -204,21 +221,21 @@ img {
   display: flex;
   align-items: center;
   gap: var(--space-sm);
-  font-family: var(--font-display);
+  font-family: var(--font-brand);
   font-size: var(--fs-600);
-  font-weight: 700;
-  color: var(--color-primary);
+  font-weight: 400;
+  color: var(--color-secondary);
 }
 
 .brand__mark {
   display: inline-grid;
   place-items: center;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
-  background-color: var(--color-primary);
+  background: radial-gradient(circle at 50% 50%, var(--color-primary) 0 55%, var(--color-secondary) 55.5% 100%);
   color: var(--color-white);
-  font-size: 1.25rem;
+  font-size: 1.2rem;
 }
 
 .nav__list {
@@ -230,7 +247,7 @@ img {
 
 .nav__link {
   font-weight: 500;
-  color: var(--color-dark);
+  color: var(--color-secondary);
   position: relative;
   padding-block: 0.25rem;
 }
@@ -262,7 +279,7 @@ img {
 
 /* Footer */
 .site-footer {
-  background-color: var(--color-dark);
+  background-color: var(--color-secondary);
   color: var(--color-cream);
   padding-block: var(--space-xl) var(--space-lg);
 }
@@ -279,7 +296,7 @@ img {
 }
 
 .footer-grid h3 {
-  color: var(--color-accent);
+  color: var(--color-primary);
   font-size: var(--fs-500);
   margin-bottom: var(--space-md);
 }
@@ -297,28 +314,34 @@ img {
 
 .footer-grid li a:hover {
   opacity: 1;
-  color: var(--color-accent);
+  color: var(--color-primary);
+}
+
+.footer-brand h3 {
+  font-family: var(--font-brand);
+  font-weight: 400;
+  font-size: var(--fs-600);
 }
 
 .footer-brand p {
-  color: rgba(253, 246, 236, 0.7);
+  color: rgba(255, 255, 255, 0.7);
   max-width: 34ch;
 }
 
 .site-footer__bottom {
-  border-top: 1px solid rgba(253, 246, 236, 0.15);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
   padding-top: var(--space-md);
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: var(--space-sm);
   font-size: var(--fs-300);
-  color: rgba(253, 246, 236, 0.6);
+  color: rgba(255, 255, 255, 0.6);
 }
 
 /* Cabecera de página interior */
 .page-header {
-  background: linear-gradient(135deg, var(--color-primary-dark), var(--color-primary));
+  background: linear-gradient(135deg, var(--color-secondary), var(--color-primary));
   color: var(--color-cream);
   padding-block: var(--space-2xl) var(--space-xl);
   text-align: center;
@@ -329,7 +352,7 @@ img {
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--color-accent);
+  color: var(--color-primary-light);
   margin-bottom: var(--space-sm);
 }
 
@@ -340,7 +363,7 @@ img {
 }
 
 .page-header p {
-  color: rgba(253, 246, 236, 0.85);
+  color: rgba(255, 255, 255, 0.85);
   max-width: 52ch;
   margin-inline: auto;
 }
