@@ -41,12 +41,9 @@
 main .section{
     display: flex;
     justify-content: space-evenly;
-    gap: 40px;
+    align-items: stretch;
 }
 
-.section .target{
-    border-color: var(--color-white);
-}
 
 .section.head{
     background: linear-gradient(to right, var(--color-dark),var(--color-primary));
@@ -57,7 +54,10 @@ main .section{
     align-items: center;
     justify-content: center;
 }
-
+.section.section.head .container{
+    text-align: center;
+    max-width: 50%;
+}
 .section.head p.section__eyebrow{
     color: var(--color-white);
     font-size: var(--fs-300);
@@ -70,4 +70,50 @@ main .section{
 .section.head h1{
     color: var(--color-cream);
     font-size: var(--fs-900);
+}
+
+
+.informacion h3.section__subtitle{
+    color: var(--color-primary-dark);
+    margin-bottom: var(--space-md);
+}
+
+.target{
+    border: 1.5px solid var(--color-line);
+    border-radius: var(--radius-md);
+    padding: 10px;
+    width: 100%;
+    max-width: 400px;
+    background-color: var(--color-white);
+}
+
+.target .informacion{
+    display: inline-block;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px;
+    margin-bottom: var(--space-md);
+}
+
+.container-point{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    margin-bottom: var(--space-md);
+}
+
+.emoji-section{
+    font-size: 1.2rem;
+    border-radius: 25%;
+    background-color: var(--color-line);
+}
+
+.horario.container{
+    width: 80%;
+    margin-bottom: var(--space-md);
+    background-color: var(--color-line);
+    padding: 0px;
+    border-radius: var(--radius-md);
 }
