@@ -1,30 +1,73 @@
 :root {
-  /* Paleta — inspirada en la tierra y el maíz salvadoreño */
-  --color-primary: #b8341b;
-  --color-primary-dark: #8c2412;
-  --color-primary-light: #d9543a;
-  --color-accent: #e0a82e;
-  --color-accent-dark: #b8861f;
-  --color-cream: #fdf6ec;
-  --color-cream-dark: #f3e7d0;
-  --color-dark: #2b2118;
-  --color-muted: #6b5d4f;
+  /* Paleta oficial */
+  --color-primary: #00a3e0;        /* Azul Cerúleo / Lago de Ilopango */
+  --color-primary-dark: #007fb0;
+  --color-primary-light: #4dbbe9;
+  --color-secondary: #0d2240;      /* Azul Marino Real — textos y contraste */
+  --color-secondary-dark: #081729;
+  --color-green: #2e5b38;          /* Verde Bosque / Palma */
+  --color-green-dark: #1f4027;
+  --color-accent: #8b5a2b;         /* Madera / Café Tostado */
+  --color-accent-dark: #6d4520;
+  --color-cream: #ffffff;          /* Blanco puro */
+  --color-cream-dark: #f8f9fa;     /* Marfil */
+  --color-dark: #0d2240;           /* Texto principal = azul marino */
+  --color-muted: #5a6b7a;
   --color-white: #ffffff;
-  --color-line: rgba(43, 33, 24, 0.12);
+  --color-line: rgba(13, 34, 64, 0.12);
 
-    /* Tipografía */
-  --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
-  --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Helvetica, Arial, sans-serif;
+
+    /* Escala tipográfica */
+  --fs-300: 0.875rem;
+  --fs-400: 1rem;
+  --fs-500: 1.125rem;
+  --fs-600: 1.375rem;
+  --fs-700: 1.75rem;
+  --fs-800: 2.25rem;
+  --fs-900: 3.25rem;
+
+  /* Espaciado */
+  --space-xs: 0.5rem;
+  --space-sm: 0.75rem;
+  --space-md: 1.25rem;
+  --space-lg: 2rem;
+  --space-xl: 3.5rem;
+  --space-2xl: 6rem;
 }
 
 /*Section del header*/
-.section__head{
-    background-color: var(--color-primary);
+
+
+main .section{
+    display: flex;
+    justify-content: space-evenly;
+    gap: 40px;
 }
 
-.section__head p:first-child{
-    text-transform: uppercase;
+.section .target{
+    border-color: var(--color-white);
+}
+
+.section.head{
+    background: linear-gradient(to right, var(--color-dark),var(--color-primary));
+}
+
+.section.head section{
+    display: inline-block;
+    align-items: center;
+    justify-content: center;
+}
+
+.section.head p.section__eyebrow{
     color: var(--color-white);
-    
+    font-size: var(--fs-300);
+}
+
+.section.head p{
+    color: var(--color-cream);
+}
+
+.section.head h1{
+    color: var(--color-cream);
+    font-size: var(--fs-900);
 }
