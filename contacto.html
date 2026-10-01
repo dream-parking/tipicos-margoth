@@ -13,14 +13,15 @@
     <link rel="stylesheet" href="css/contacto.css">
 </head>
 <body>
+    <!-- header -->
     <header class="site-header">
             <div class="site-header__inner">
-                <a  class="brand" href="#">Café SantaCruz</a>
+                <a  class="brand" href="#">Café Santa Cruz</a>
                 <nav class="main-nav">
                     <ul class="nav__list">
-                        <li> <a href="#" class="nav__link">Inicio</a></li>
-                        <li><a href="#" class="nav__link">Menú</a></li>
-                        <li><a href="#" class="nav__link">Contacto</a></li>
+                        <li> <a href="index.html" class="nav__link">Inicio</a></li>
+                        <li><a href="menu.html" class="nav__link">Menú</a></li>
+                        <li><a href="contacto.html" class="nav__link">Contacto</a></li>
                         <li>
                             <a href="#" class="nav__cta btn btn--primary ">Pide ahora</a>
                         </li>
@@ -28,7 +29,7 @@
                 </nav>
             </div>
     </header>
-
+    <!-- Sección del header -->
     <section class="section head"> 
         <div class="container">
             <p class="section__eyebrow">
@@ -39,49 +40,43 @@
         </div>
     </section>
     <main>
+        <!-- sección de información -->
         <section class="section">
+            <!-- primera targeta de información -->
             <div class="container target">
 
-                <div class="container">
+                <div class="container informacion">
                     <h3 class="section__subtitle">Información</h3>
 
-                    <div class="conteiner">
-                        <div class="container_point">
-                            <span class="emoji-section">📍</span>
-                        </div>
-                        <div class="conteiner">
-                            <p>Dirección</p>
-                            <p>Pasaje Itmania, San Salvador, El Salvador</p>
+                    <div class="container-point">
+                        <span class="emoji-section">📍</span>
+                        <div class="conteiner-text">
+                            <p class="section__eyebrow">Dirección</p>
+                            <p>Km 24, Carretera Panorámica, San Francisco Chinameca, La Paz</p>
                         </div>
                     </div>
 
-                    <div class="conteiner">
-                        <div class="container_point">
-                            <span class="emoji-section">✉️</span>
-                        </div>
+                    <div class="container-point">
+                            <span class="emoji-section">📞</span>
                         <div class="conteiner">
-                            <p>Correo</p>
-                            <p>atencionalcliente@tipicos,argoth.com</p>
+                            <p class="section__eyebrow">Teléfono</p>
+                            <p>+503 7667-6465</p>
                         </div>
                     </div>
 
-                    <div class="conteiner">
-                        <div class="container_point">
-                            <span class="emoji-section">🌐</span>
-                        </div>
+                    <div class="container-point">
+                        <span class="emoji-section">🚗</span>
                         <div class="conteiner">
-                            <p>Sitio Web</p>
-                            <p>www.tipicosargoth.com</p>
+                            <p class="section__eyebrow">Cómo llegar</p>
+                            <p>A 30 min de San Salvador pro la carretera Panorámica</p>
                         </div>
                     </div>
 
-                    <div class="conteiner">
-                        <div class="container_point">
-                            <span class="emoji-section">🏢</span>
-                        </div>
+                    <div class="container-point">
+                            <span class="emoji-section">🐶</span>
                         <div class="conteiner">
-                            <p>Razón social</p>
-                            <p>ARYES S.A. de C.V.</p>
+                            <p class="section__eyebrow">Pet Friendly</p>
+                            <p>Mascotas bienvenidas en la terraza y área exterior </p>
                         </div>
                     </div>
                 </div>
@@ -91,54 +86,72 @@
                     <table class="schedule-table">
                         <tbody>
                         <tr>
-                            <th scope="row">Lunes</th>
-                            <td>7:00 a.m. – 9:30 p.m.</td>
+                            <th scope="row" class="schedule-table__day">Lunes a viernes</th>
+                            <td class="schedule-table__time">11:00 a.m. – 7:00 p.m.</td>
                         </tr>
                         <tr>
-                            <th scope="row">Martes</th>
-                            <td>7:00 a.m. – 9:30 p.m.</td>
+                            <th scope="row" class="schedule-table__day">Sábado</th>
+                            <td class="schedule-table__time">8:00 a.m. – 9:00 p.m.</td>
                         </tr>
                         <tr>
-                            <th scope="row">Miércoles</th>
-                            <td>7:00 a.m. – 9:30 p.m.</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Jueves</th>
-                            <td>7:00 a.m. – 9:30 p.m.</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Viernes</th>
-                            <td>7:00 a.m. – 9:30 p.m.</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Sábado</th>
-                            <td>7:00 a.m. – 9:30 p.m.</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Domingo</th>
-                            <td>7:00 a.m. – 9:30 p.m.</td>
+                            <th scope="row" class="schedule-table__day">Domingo</th>
+                            <td class="schedule-table__time">8:00 a.m. – 9:00 p.m.</td>
                         </tr>
                         </tbody>
                     </table>
                 </div>
-                <div class="container">
+                <div class="container redes">
                     <h3 class="section__subtitle">Síguenos</h3>
                     <a href="#" class="btn btn--primary">Facebook</a>
                     <a href="#" class="btn btn--primary">Instagram</a>
-                    <a href="#" class="btn btn--primary">Twitter</a>
                 </div>
             </div>
-            <div class="container target">
-                <h3>Envíamos un mensaje</h3>
-                <p>Cuéntanos tu pedido o consulta y te respondemos lo antes posibles.</p>
-                /*Aqui va el formula*/
-                <p>Te respondemos en un máximo de 24 horas hábiles. Para pedidos urgentes, escríbemos pro nuestras redes sociales.</p>
+            <!-- Formulario de contacto -->
+            <div class="container target form">
+                <h3>Reserva o escribenos</h3>
+                <p>¿Quieres asegurar mesa con vista para el atardecer o tienes alguna consulta? Escribenos y te respondemos lo antes posible.</p>
+                <form class="formulario-contacto">
+                    <div class="fila-doble">
+                        <div class="campo">
+                        <label for="nombre">NOMBRE</label>
+                        <input type="text" id="nombre" placeholder="Tu nombre completo">
+                        </div>
+                        <div class="campo">
+                        <label for="telefono">TELÉFONO</label>
+                        <input type="tel" id="telefono" placeholder="+503 ____-____">
+                        </div>
+                    </div>
+
+                    <div class="campo">
+                        <label for="correo">CORREO ELECTRÓNICO</label>
+                        <input type="email" id="correo" placeholder="tucorreo@ejemplo.com">
+                    </div>
+
+                    <div class="campo">
+                        <label for="asunto">ASUNTO</label>
+                        <select id="asunto">
+                        <option>Reservación de mesa</option>
+                        <option>Consulta general</option>
+                        <option>Pedido especial</option>
+                        <option>Otro</option>
+                        </select>
+                    </div>
+
+                    <div class="campo">
+                        <label for="mensaje">MENSAJE</label>
+                        <textarea id="mensaje" rows="4" placeholder="Cuéntanos tu reserva o consulta..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-enviar">Enviar mensaje</button>
+                </form>
+                <p>Para los fines de semana recomendamos resercar mesa con vista. Llámanos al +503 7667-6465 para atención inmediata.</p>
             </div>
         </section>
-        <section class="section">
-            <div class="container target">
+        <!-- mapa ubicación -->
+        <section class="section maps">
+            <div class="container">
                 <iframe
-                    src="https://www.google.com/maps?q=T%C3%ADpicos+Margoth+Escal%C3%B3n,13.7047073,-89.2341758&z=16&output=embed"
+                    src="https://www.google.com/maps?q=13.622791,-89.056795&hl=es&z=16&output=embed"
                     width="100%"
                     height="400"
                     style="border:0;"
@@ -149,6 +162,45 @@
                 </iframe>
             </div>
         </section>
+        <footer class="site-footer">
+            <div class="container">
+                <div class="footer-grid">
+
+                <!--Columna 1-->
+                <div class="footer-brand">
+                    <h3>Café Santa Cruz</h3>
+                    <p>Café de especialidad y comida típica con la mejor vista al Lago de Ilopango.</p>
+                </div>
+
+                <!--Columna 2-->
+                <div>
+                    <h3>Navegación</h3>
+                    <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="menu.html">Menú</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                    </ul>
+                </div>
+
+                <!--Columna 3-->
+                <div>
+                    <h3>Contacto</h3>
+                    <ul>
+                    <li>Km 24 Carretera Panorámica, San Francisco Chinameca</li>
+                    <li><a href="tel:+50376676465">+503 7667-6465</a></li>
+                    <li>Lun–Vie 11 a.m. – 7 p.m.</li>
+                    <li>Sáb–Dom 8 a.m. – 9 p.m.</li>
+                    </ul>
+                </div>
+                </div>
+
+                <!-- Franja -->
+                <div class="site-footer__bottom">
+                <span>© 2026 Café Santa Cruz</span>
+                <span>Hecho en El Salvador</span>
+                </div>
+            </div>
+        </footer>
     </main>
 </body>
 </html>
