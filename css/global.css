@@ -18,6 +18,7 @@
   --color-muted: #5a6b7a;
   --color-white: #ffffff;
   --color-line: rgba(13, 34, 64, 0.12);
+  --color-error: #b3261e;
 
   /* Tipografía */
   --font-display: "Playfair Display", Georgia, "Times New Roman", serif;

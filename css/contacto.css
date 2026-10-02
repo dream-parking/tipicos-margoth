@@ -115,6 +115,10 @@
   margin-top: var(--space-md);
 }
 
+.formulario__hint {
+  margin-bottom: var(--space-md);
+}
+
 .fila-doble {
   display: flex;
   flex-wrap: wrap;
@@ -174,6 +178,13 @@
 
 .campo textarea {
   resize: vertical;
+}
+
+/* Marca en rojo los campos inválidos solo después de que el usuario los toca */
+.campo input:user-invalid,
+.campo select:user-invalid,
+.campo textarea:user-invalid {
+  border-color: var(--color-error);
 }
 
 
