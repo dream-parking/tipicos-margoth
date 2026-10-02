@@ -41,6 +41,17 @@
     background: linear-gradient(to right, var(--color-dark),var(--color-primary));
 }
 
+.site-header__logo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.site-header__logo-image{
+    display: block;
+    width: 90px;
+    height: auto;
+    margin: 0 auto;
+}
 .section.head section{
     display: inline-block;
     align-items: center;
