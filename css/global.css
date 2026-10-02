@@ -365,6 +365,22 @@ img {
   margin-inline: auto;
 }
 
+/* Llamado a la acción final (Menú y Galería) */
+.visit {
+  padding-block: var(--space-xl);
+  text-align: center;
+}
+
+.visit__title {
+  font-size: var(--fs-600);
+  margin-bottom: var(--space-xs);
+}
+
+.visit__text {
+  max-width: 52ch;
+  margin: 0 auto var(--space-md);
+}
+
 /* Utilidades */
 .text-center {
   text-align: center;

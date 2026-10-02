@@ -101,23 +101,6 @@
 }
 
 
-/* ------- ¿LO VES EN VIVO? ------- */
-.visit {
-    padding-block: var(--space-xl);
-    text-align: center;
-}
-
-.visit__title {
-    font-size: var(--fs-600);
-    margin-bottom: var(--space-xs);
-}
-
-.visit__text {
-    max-width: 52ch;
-    margin: 0 auto var(--space-md);
-}
-
-
 /* ------- MEDIA QUERIES ------- */
 @media (max-width: 820px) {
     .moments__grid {
