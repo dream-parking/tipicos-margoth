@@ -53,7 +53,6 @@
 
   /* Layout */
   --container-max: 1180px;
-  --container-narrow: 820px;
   --header-h: 76px;
 }
 
@@ -100,16 +99,8 @@ img {
   padding-inline: var(--space-lg);
 }
 
-.container--narrow {
-  max-width: var(--container-narrow);
-}
-
 .section {
   padding-block: var(--space-2xl);
-}
-
-.section--tight {
-  padding-block: var(--space-xl);
 }
 
 .section--alt {
@@ -382,10 +373,6 @@ img {
 }
 
 /* Utilidades */
-.text-center {
-  text-align: center;
-}
-
 .sr-only {
   position: absolute;
   width: 1px;
