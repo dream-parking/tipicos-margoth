@@ -1,3 +1,15 @@
+.site-header__logo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.site-header__logo-image{
+    display: block;
+    width: 90px;
+    height: auto;
+    margin: 0 auto;
+}
+
 /* ------- LA CARTA ------- */
 .gallery__grid {
     display: grid;
