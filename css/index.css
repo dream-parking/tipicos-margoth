@@ -297,7 +297,7 @@
             color-mix(in srgb, var(--color-secondary-dark) 70%, transparent),
             color-mix(in srgb, var(--color-secondary-dark) 65%, transparent)
         ),
-        url("../img/vistas4.jpg") center / cover no-repeat;
+        url("../img/vista-lago.webp") center / cover no-repeat;
     background-color: var(--color-secondary);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-lg);
