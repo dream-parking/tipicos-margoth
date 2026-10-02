@@ -35,9 +35,9 @@ Proyecto del curso Web 2 (ESEN).
 
 ## Convenciones
 
-- Cada página carga `reset.css`, `global.css` y su propia hoja. Una página nunca carga la hoja de otra.
+- Cada página carga `reset.css`, `global.css` y, si la tiene, su propia hoja. Una página nunca carga la hoja de otra. `404.html` solo usa `reset.css` y `global.css`, con rutas absolutas (`/css/...`) porque GitHub Pages la muestra en cualquier URL inexistente.
 - Los colores, tamaños de fuente y espacios se definen como variables en `:root` (`global.css`) y se usan con `var(--...)`.
-- Las clases siguen el estilo BEM: `bloque__elemento--modificador` (por ejemplo `site-header__logo`, `btn--primary`).
+- La mayoría de las clases siguen el estilo BEM, `bloque__elemento--modificador` (por ejemplo `site-header__logo`, `btn--primary`, `menu-item__tag`).
 - Puntos de quiebre: **820px** (tablet: grillas a 1–2 columnas, se oculta el botón Reservar), **560px** (móvil) y **480px** (header en dos filas).
 - Maquetación: Grid para las grillas (ofertas, recomendaciones, galería, menú, contacto) y Flexbox para alinear elementos en una fila (header, nav, listas).
 

@@ -290,6 +290,12 @@
     text-align: center;
 }
 
+/* Sobre el fondo oscuro, el hover marino del botón no se distinguiría */
+.recommend .btn--primary:hover {
+    background-color: var(--color-primary-light);
+    color: var(--color-secondary);
+}
+
 
 /* ------- BANNER FINAL ------- */
 .cta__box {
