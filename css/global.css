@@ -57,6 +57,10 @@
 }
 
 /* Base */
+html {
+  scroll-padding-top: var(--header-h);
+}
+
 body {
   font-family: var(--font-body);
   font-size: var(--fs-400);
@@ -72,6 +76,7 @@ h4 {
   font-weight: 700;
   line-height: 1.15;
   color: var(--color-secondary);
+  overflow-wrap: break-word;
 }
 
 p {
@@ -217,25 +222,16 @@ img {
   padding-inline: var(--space-lg);
 }
 
-.brand {
+.site-header__logo {
   display: flex;
   align-items: center;
-  gap: var(--space-sm);
-  font-family: var(--font-brand);
-  font-size: var(--fs-600);
-  font-weight: 400;
-  color: var(--color-secondary);
+  flex-shrink: 0;
 }
 
-.brand__mark {
-  display: inline-grid;
-  place-items: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 50% 50%, var(--color-primary) 0 55%, var(--color-secondary) 55.5% 100%);
-  color: var(--color-white);
-  font-size: 1.2rem;
+.site-header__logo-image {
+  width: auto;
+  height: calc(var(--header-h) - 12px);
+  border-radius: 0;
 }
 
 .nav__list {
@@ -397,7 +393,7 @@ img {
     gap: var(--space-md);
   }
 
-  .nav__cta {
+  .nav__item--cta {
     display: none;
   }
 
@@ -417,7 +413,24 @@ img {
     font-size: var(--fs-300);
   }
 
-  .brand {
-    font-size: var(--fs-500);
+  .site-header__inner {
+    padding-inline: var(--space-md);
+  }
+}
+
+/* Móvil pequeño: logo arriba y navegación debajo */
+@media (max-width: 480px) {
+  :root {
+    --header-h: 104px;
+  }
+
+  .site-header__inner {
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--space-xs);
+  }
+
+  .site-header__logo-image {
+    height: 48px;
   }
 }
