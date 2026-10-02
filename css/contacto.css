@@ -162,9 +162,9 @@
 .campo input:focus,
 .campo select:focus,
 .campo textarea:focus {
-  outline: 2px solid var(--color-primary);
+  outline: 2px solid var(--color-primary-dark);
   outline-offset: 1px;
-  border-color: var(--color-primary);
+  border-color: var(--color-primary-dark);
 }
 
 .campo select {
