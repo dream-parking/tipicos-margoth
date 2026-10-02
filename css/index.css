@@ -290,6 +290,12 @@
     text-align: center;
 }
 
+/* Sobre el fondo oscuro, el hover marino del botón no se distinguiría */
+.recommend .btn--primary:hover {
+    background-color: var(--color-primary-light);
+    color: var(--color-secondary);
+}
+
 
 /* ------- BANNER FINAL ------- */
 .cta__box {
@@ -297,7 +303,7 @@
             color-mix(in srgb, var(--color-secondary-dark) 70%, transparent),
             color-mix(in srgb, var(--color-secondary-dark) 65%, transparent)
         ),
-        url("../img/vistas4.jpg") center / cover no-repeat;
+        url("../img/vista-lago.webp") center / cover no-repeat;
     background-color: var(--color-secondary);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-lg);

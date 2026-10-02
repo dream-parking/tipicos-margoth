@@ -18,6 +18,7 @@
   --color-muted: #5a6b7a;
   --color-white: #ffffff;
   --color-line: rgba(13, 34, 64, 0.12);
+  --color-error: #b3261e;
 
   /* Tipografía */
   --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
@@ -52,11 +53,14 @@
 
   /* Layout */
   --container-max: 1180px;
-  --container-narrow: 820px;
   --header-h: 76px;
 }
 
 /* Base */
+html {
+  scroll-padding-top: var(--header-h);
+}
+
 body {
   font-family: var(--font-body);
   font-size: var(--fs-400);
@@ -72,6 +76,7 @@ h4 {
   font-weight: 700;
   line-height: 1.15;
   color: var(--color-secondary);
+  overflow-wrap: break-word;
 }
 
 p {
@@ -94,16 +99,8 @@ img {
   padding-inline: var(--space-lg);
 }
 
-.container--narrow {
-  max-width: var(--container-narrow);
-}
-
 .section {
   padding-block: var(--space-2xl);
-}
-
-.section--tight {
-  padding-block: var(--space-xl);
 }
 
 .section--alt {
@@ -149,14 +146,15 @@ img {
     box-shadow 0.2s ease;
 }
 
+/* Fondo #007fb0: con texto blanco da 4.5:1 (el cian #00a3e0 daba 2.87:1) */
 .btn--primary {
-  background-color: var(--color-primary);
+  background-color: var(--color-primary-dark);
   color: var(--color-white);
   box-shadow: var(--shadow-sm);
 }
 
 .btn--primary:hover {
-  background-color: var(--color-primary-dark);
+  background-color: var(--color-secondary);
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
 }
@@ -217,25 +215,16 @@ img {
   padding-inline: var(--space-lg);
 }
 
-.brand {
+.site-header__logo {
   display: flex;
   align-items: center;
-  gap: var(--space-sm);
-  font-family: var(--font-brand);
-  font-size: var(--fs-600);
-  font-weight: 400;
-  color: var(--color-secondary);
+  flex-shrink: 0;
 }
 
-.brand__mark {
-  display: inline-grid;
-  place-items: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 50% 50%, var(--color-primary) 0 55%, var(--color-secondary) 55.5% 100%);
-  color: var(--color-white);
-  font-size: 1.2rem;
+.site-header__logo-image {
+  width: auto;
+  height: calc(var(--header-h) - 12px);
+  border-radius: 0;
 }
 
 .nav__list {
@@ -259,13 +248,13 @@ img {
   bottom: -2px;
   width: 0;
   height: 2px;
-  background-color: var(--color-primary);
+  background-color: var(--color-primary-dark);
   transition: width 0.25s ease;
 }
 
 .nav__link:hover,
 .nav__link[aria-current="page"] {
-  color: var(--color-primary);
+  color: var(--color-primary-dark);
 }
 
 .nav__link:hover::after,
@@ -286,6 +275,10 @@ img {
 
 .site-footer a {
   color: var(--color-cream);
+}
+
+.site-footer address {
+  font-style: normal;
 }
 
 .footer-grid {
@@ -341,7 +334,7 @@ img {
 
 /* Cabecera de página interior */
 .page-header {
-  background: linear-gradient(135deg, var(--color-secondary), var(--color-primary));
+  background: linear-gradient(135deg, var(--color-secondary), var(--color-primary-dark));
   color: var(--color-cream);
   padding-block: var(--space-2xl) var(--space-xl);
   text-align: center;
@@ -352,7 +345,7 @@ img {
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--color-primary-light);
+  color: var(--color-white);
   margin-bottom: var(--space-sm);
 }
 
@@ -363,16 +356,28 @@ img {
 }
 
 .page-header p {
-  color: rgba(255, 255, 255, 0.85);
+  color: var(--color-white);
   max-width: 52ch;
   margin-inline: auto;
 }
 
-/* Utilidades */
-.text-center {
+/* Llamado a la acción final (Menú y Galería) */
+.visit {
+  padding-block: var(--space-xl);
   text-align: center;
 }
 
+.visit__title {
+  font-size: var(--fs-600);
+  margin-bottom: var(--space-xs);
+}
+
+.visit__text {
+  max-width: 52ch;
+  margin: 0 auto var(--space-md);
+}
+
+/* Utilidades */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -397,7 +402,7 @@ img {
     gap: var(--space-md);
   }
 
-  .nav__cta {
+  .nav__item--cta {
     display: none;
   }
 
@@ -417,7 +422,24 @@ img {
     font-size: var(--fs-300);
   }
 
-  .brand {
-    font-size: var(--fs-500);
+  .site-header__inner {
+    padding-inline: var(--space-md);
+  }
+}
+
+/* Móvil pequeño: logo arriba y navegación debajo */
+@media (max-width: 480px) {
+  :root {
+    --header-h: 104px;
+  }
+
+  .site-header__inner {
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--space-xs);
+  }
+
+  .site-header__logo-image {
+    height: 48px;
   }
 }

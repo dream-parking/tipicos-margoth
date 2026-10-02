@@ -5,34 +5,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Café Santa Cruz</title>
   <meta name="description" content="Café Santa Cruz — café de especialidad y comida típica salvadoreña con la mejor vista al Lago de Ilopango.">
+  <link rel="icon" href="img/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/global.css">
   <link rel="stylesheet" href="css/index.css">
-  <link rel="stylesheet" href="css/contacto.css">    
 </head>
 
 <body>
     <!-- header -->
     <header class="site-header">
-            <div class="site-header__inner">
-                <div class="site-header__logo">
-                    <img src="img/logo.png" alt="Logo de Café Santa Cruz" class="site-header__logo-image">
-                </div>
-                <nav class="main-nav">
-                    <ul class="nav__list">
-                        <li> <a href="index.html" class="nav__link">Inicio</a></li>
-                        <li><a href="menu.html" class="nav__link">Menú</a></li>
-                        <li><a href="gallery.html" class="nav__link">Galería</a></li>
-                        <li><a href="contacto.html" class="nav__link">Contacto</a></li>
-                        <li>
-                            <a href="#" class="nav__cta btn btn--primary ">Pide ahora</a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
+        <div class="site-header__inner">
+            <a href="index.html" class="site-header__logo">
+                <img src="img/logo.webp" alt="Café Santa Cruz, ir al inicio" class="site-header__logo-image" width="192" height="192">
+            </a>
+            <nav class="main-nav" aria-label="Principal">
+                <ul class="nav__list">
+                    <li><a href="index.html" class="nav__link" aria-current="page">Inicio</a></li>
+                    <li><a href="menu.html" class="nav__link">Menú</a></li>
+                    <li><a href="galeria.html" class="nav__link">Galería</a></li>
+                    <li><a href="contacto.html" class="nav__link">Contacto</a></li>
+                    <li class="nav__item--cta">
+                        <a href="contacto.html#reserva" class="nav__cta btn btn--primary">Reservar</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
     </header>
     <main>
         <!-- ------ Hero ------ -->
@@ -56,7 +57,7 @@
 
                 <div class="hero__actions">
                     <a href="menu.html" class="btn btn--accent">Ver el menú</a>
-                    <a href="contacto.html" class="btn btn--ghost">Cómo llegar</a>
+                    <a href="contacto.html#como-llegar" class="btn btn--ghost">Cómo llegar</a>
                 </div>
 
                 <div class="hero__stats">
@@ -77,7 +78,7 @@
 
             
             <div class="hero__visual">
-                <img src="img/inicio.jpg" alt="Vista del Lago de Ilopango desde Café Santa Cruz">
+                <img src="img/hero-terraza.webp" alt="Vista del Lago de Ilopango desde Café Santa Cruz" width="1120" height="1400">
             </div>
         </div>
        </section>
@@ -89,7 +90,7 @@
 
             <!--Columna izq-->
             <figure class="history__visual">
-                <img src="img/vistas.jpg" alt="Terraza de Café Santa Cruz con vista al lago">
+                <img src="img/jardines-mirador.webp" alt="Jardines y terraza de Café Santa Cruz con vista al Lago de Ilopango" width="1050" height="1400" loading="lazy">
                 <figcaption class="history__caption">Café Santa Cruz, en lo alto de la Carretera Panorámica</figcaption>
             </figure>
 
@@ -120,7 +121,7 @@
 
             <div class="offer__grid">
                 <article class="offer__card">
-                    <img class="offer__img" src="img/cafe.jpg" alt="Café de olla">
+                    <img class="offer__img" src="img/cafe-especialidad.webp" alt="Café de especialidad preparado en Chemex frente al Lago de Ilopango" width="958" height="1400" loading="lazy">
                     <div class="offer__body">
                         <h3 class="offer__title">Café de olla y de especialidad</h3>
                         <p>
@@ -131,7 +132,7 @@
                 </article>
 
                 <article class="offer__card">
-                    <img class="offer__img" src="img/comida3.jpg" alt="Comida Típica">
+                    <img class="offer__img" src="img/desayunos-tipicos.webp" alt="Desayunos típicos salvadoreños con plátano frito, frijoles, huevos y tamales" width="1400" height="781" loading="lazy">
                     <div class="offer__body">
                         <h3 class="offer__title">Comida típica salvadoreña</h3>
                         <p>
@@ -142,7 +143,7 @@
                 </article>
 
                 <article class="offer__card">
-                    <img class="offer__img" src="img/vistas 3.jpg" alt="Mirador al Lago de Ilopang">
+                    <img class="offer__img" src="img/terraza-atardecer.webp" alt="Terraza con mesas frente al Lago de Ilopango al atardecer" width="1120" height="1400" loading="lazy">
                     <div class="offer__body">
                         <h3 class="offer__title">Mirador al Lago de Ilopango</h3>
                         <p>
@@ -167,7 +168,7 @@
 
                 <div class="recommend__grid">
                     <article class="recommend__photo recommend__photo--featured">
-                        <img src="img/horchata.jpeg" alt="Vaso horchata de morro">
+                        <img src="img/horchata-de-morro.webp" alt="Vaso de horchata de morro" width="1400" height="1024" loading="lazy">
                         <div class="recommend__info">
                             <span class="recommend__note">la favorita de la casa</span>
                             <h3 class="recommend__title">Horchata de morro</h3>
@@ -178,7 +179,7 @@
                     </article>
 
                     <article class="recommend__photo">
-                        <img src="img/cafeolla.jpg" alt="Café de olla">
+                        <img src="img/cafe-de-olla.webp" alt="Café de olla" width="1050" height="1400" loading="lazy">
                         <div class="recommend__info">
                             <h3 class="recommend__title">Café de olla</h3>
                             <p class="recommend__text">
@@ -188,17 +189,17 @@
                     </article>
 
                     <article class="recommend__photo">
-                        <img src="img/pupusas.jpeg" alt="Plato de pupusas">
+                        <img src="img/pupusas.webp" alt="Plato de pupusas" width="1200" height="900" loading="lazy">
                         <div class="recommend__info">
                             <h3 class="recommend__title">Pupusas de la casa</h3>
                             <p class="recommend__text">
-                                Hechas a mano al momento, como debe ser
+                                Hechas a mano al momento, como debe ser.
                             </p>
                         </div>
                     </article>
 
                     <article class="recommend__photo recommend__photo--wide">
-                        <img src="img/tresLeches.jpg" alt="Tres leches de horchata">
+                        <img src="img/tres-leches.webp" alt="Tres leches de horchata" width="1400" height="788" loading="lazy">
                         <div class="recommend__info">
                             <h3 class="recommend__title">Tres leches de horchata</h3>
                             <p class="recommend__text">
@@ -223,7 +224,7 @@
                         Llega entre 4:00 y 5:00 p.m. para conseguir mesa con vista. Estamos en el
                         Km 24 de la Carretera Panorámica de San Francisco Chinameca. Abierto toda la semana.
                     </p>
-                    <a href="contacto.html" class="btn btn--accent">Cómo llegar</a>
+                    <a href="contacto.html#como-llegar" class="btn btn--accent">Cómo llegar</a>
                 </div>
             </div>
          </section>
@@ -243,25 +244,27 @@
           </div>
 
           <!--Columna 2-->
-          <div>
+          <nav aria-label="Pie de página">
             <h3>Navegación</h3>
             <ul>
               <li><a href="index.html">Inicio</a></li>
               <li><a href="menu.html">Menú</a></li>
-              <li><a href="gallery.html">Galería</a></li>
+              <li><a href="galeria.html">Galería</a></li>
               <li><a href="contacto.html">Contacto</a></li>
             </ul>
-          </div>
+          </nav>
 
           <!--Columna 3-->
           <div>
             <h3>Contacto</h3>
-            <ul>
-              <li>Km 24 Carretera Panorámica, San Francisco Chinameca</li>
-              <li><a href="tel:+50376676465">+503 7667-6465</a></li>
-              <li>Lun–Vie 11 a.m. – 7 p.m.</li>
-              <li>Sáb–Dom 8 a.m. – 9 p.m.</li>
-            </ul>
+            <address>
+              <ul>
+                <li>Km 24 Carretera Panorámica, San Francisco Chinameca</li>
+                <li><a href="tel:+50376676465">+503 7667-6465</a></li>
+                <li>Lun–Vie 11 a.m. – 7 p.m.</li>
+                <li>Sáb–Dom 8 a.m. – 9 p.m.</li>
+              </ul>
+            </address>
           </div>
         </div>
 

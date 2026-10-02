@@ -4,41 +4,43 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Galería · Café Santa Cruz</title>
-  <meta name="description" content="Café Santa Cruz — café de especialidad y comida típica salvadoreña con la mejor vista al Lago de Ilopango.">
+  <meta name="description" content="Galería de Café Santa Cruz: fotos de la carta, de la terraza y de la vista al Lago de Ilopango del amanecer al anochecer.">
+  <link rel="icon" href="img/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/global.css">
-  <link rel="stylesheet" href="css/gallery.css">
+  <link rel="stylesheet" href="css/galeria.css">
 </head>
 <body>
 
     <!-- header -->
     <header class="site-header">
-            <div class="site-header__inner">
-                <div class="site-header__logo">
-                    <img src="img/logo.png" alt="Logo de Café Santa Cruz" class="site-header__logo-image">
-                </div>
-                <nav class="main-nav">
-                    <ul class="nav__list">
-                        <li> <a href="index.html" class="nav__link">Inicio</a></li>
-                        <li><a href="menu.html" class="nav__link">Menú</a></li>
-                        <li><a href="gallery.html" class="nav__link">Galería</a></li>
-                        <li><a href="contacto.html" class="nav__link">Contacto</a></li>
-                        <li>
-                            <a href="#" class="nav__cta btn btn--primary ">Pide ahora</a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
+        <div class="site-header__inner">
+            <a href="index.html" class="site-header__logo">
+                <img src="img/logo.webp" alt="Café Santa Cruz, ir al inicio" class="site-header__logo-image" width="192" height="192">
+            </a>
+            <nav class="main-nav" aria-label="Principal">
+                <ul class="nav__list">
+                    <li><a href="index.html" class="nav__link">Inicio</a></li>
+                    <li><a href="menu.html" class="nav__link">Menú</a></li>
+                    <li><a href="galeria.html" class="nav__link" aria-current="page">Galería</a></li>
+                    <li><a href="contacto.html" class="nav__link">Contacto</a></li>
+                    <li class="nav__item--cta">
+                        <a href="contacto.html#reserva" class="nav__cta btn btn--primary">Reservar</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
 <main>
     <!-- hero -->
     <section class="page-header">
         <div class="container">
-            <div class="page-header__eyebrow">Un paseo visual</div>
+            <p class="page-header__eyebrow">Un paseo visual</p>
             <h1>Galería Santa Cruz</h1>
             <p>
                 Un vistazo a la carta y a la vista que te espera en la Carretera Panorámica.
@@ -63,7 +65,7 @@
 
             <div class="gallery__grid">
                 <figure class="gallery__item gallery__item--wide">
-                    <img src="img/bebidaCaliente.jpeg" alt="Café recién hecho">
+                    <img src="img/bebidas-calientes.webp" alt="Taza de chocolate caliente y taza de café sobre una mesa de madera" width="1354" height="1020" loading="lazy">
                     <figcaption class="gallery__caption">
                         <h3 class="gallery__title">Café &amp; bebidas calientes</h3>
                         <p class="gallery__text">Grano salvadoreño de altura</p>
@@ -71,7 +73,7 @@
                 </figure>
 
                 <figure class="gallery__item">
-                    <img src="img/bebidas.jpeg" alt="Bebidas frías">
+                    <img src="img/bebidas-frias.webp" alt="Tres bebidas frías en frascos de vidrio: dos cremosas y una de frutas con limón" width="1360" height="906" loading="lazy">
                     <figcaption class="gallery__caption">
                         <h3 class="gallery__title">Bebidas frías</h3>
                         <p class="gallery__text">Horchata, jugos y cocteles</p>
@@ -79,7 +81,7 @@
                 </figure>
 
                 <figure class="gallery__item">
-                    <img src="img/carne.jpg" alt="Plato de comida">
+                    <img src="img/carnes.webp" alt="Corte de carne a la parrilla con vegetales y un coctel, con el lago al atardecer de fondo" width="1024" height="768" loading="lazy">
                     <figcaption class="gallery__caption">
                         <h3 class="gallery__title">Comida &amp; carnes</h3>
                         <p class="gallery__text">Pupusas, churrasco, ceviche</p>
@@ -87,7 +89,7 @@
                 </figure>
 
                 <figure class="gallery__item gallery__item--wide">
-                    <img src="img/postres.jpeg" alt="Postres">
+                    <img src="img/postres.webp" alt="Cheesecake con frutos rojos y salsa de fresa" width="1360" height="1020" loading="lazy">
                     <figcaption class="gallery__caption">
                         <h3 class="gallery__title">Postres artesanales</h3>
                         <p class="gallery__text">Tres leches de horchata y más</p>
@@ -113,24 +115,36 @@
             </div>
 
             <div class="moments__grid">
-                <article class="moment moment--sunrise">
-                    <h3 class="moment__title">Amanecer</h3>
-                    <p class="moment__text">Desayuno temprano con niebla bajando del lago.</p>
+                <article class="moment">
+                    <img class="moment__img" src="img/mirador-amanecer.webp" alt="Terraza techada con plantas y flores frente al lago en la mañana" width="1120" height="1400" loading="lazy">
+                    <div class="moment__body">
+                        <h3 class="moment__title">Amanecer</h3>
+                        <p class="moment__text">Desayuno temprano con aire fresco y el lago despejado.</p>
+                    </div>
                 </article>
 
-                <article class="moment moment--midday">
-                    <h3 class="moment__title">Mediodía</h3>
-                    <p class="moment__text">Brisa fresca y cielo despejado sobre el agua.</p>
+                <article class="moment">
+                    <img class="moment__img" src="img/mirador-mediodia.webp" alt="Jardín con bancas de madera frente al lago bajo un cielo con nubes" width="1050" height="1400" loading="lazy">
+                    <div class="moment__body">
+                        <h3 class="moment__title">Mediodía</h3>
+                        <p class="moment__text">Brisa fresca y nubes altas sobre el agua.</p>
+                    </div>
                 </article>
 
-                <article class="moment moment--sunset">
-                    <h3 class="moment__title">Atardecer</h3>
-                    <p class="moment__text">El momento estrella: llega entre 4 y 5 p.m.</p>
+                <article class="moment">
+                    <img class="moment__img" src="img/mirador-atardecer.webp" alt="Visitantes en el mirador viendo el atardecer sobre el lago" width="1120" height="1400" loading="lazy">
+                    <div class="moment__body">
+                        <h3 class="moment__title">Atardecer</h3>
+                        <p class="moment__text">El momento estrella: llega entre 4 y 5 p.m.</p>
+                    </div>
                 </article>
 
-                <article class="moment moment--dusk">
-                    <h3 class="moment__title">Anochecer</h3>
-                    <p class="moment__text">Luces cálidas, café y postre bajo las estrellas.</p>
+                <article class="moment">
+                    <img class="moment__img" src="img/mirador-anochecer.webp" alt="Terraza iluminada de noche con mesas bajo un árbol grande" width="1120" height="1400" loading="lazy">
+                    <div class="moment__body">
+                        <h3 class="moment__title">Anochecer</h3>
+                        <p class="moment__text">Luces cálidas, café y postre bajo las estrellas.</p>
+                    </div>
                 </article>
             </div>
         </div>
@@ -144,7 +158,7 @@
                 Sube a la Carretera Panorámica y comprueba por qué la vista es nuestro mejor
                 ingrediente. Te esperamos con café listo.
             </p>
-            <a href="contacto.html" class="btn btn--accent">Cómo llegar</a>
+            <a href="contacto.html#como-llegar" class="btn btn--accent">Cómo llegar</a>
         </div>
     </section>
 </main>
@@ -162,25 +176,27 @@
           </div>
 
           <!--Columna 2-->
-          <div>
+          <nav aria-label="Pie de página">
             <h3>Navegación</h3>
             <ul>
               <li><a href="index.html">Inicio</a></li>
               <li><a href="menu.html">Menú</a></li>
-              <li><a href="gallery.html">Galería</a></li>
+              <li><a href="galeria.html">Galería</a></li>
               <li><a href="contacto.html">Contacto</a></li>
             </ul>
-          </div>
+          </nav>
 
           <!--Columna 3-->
           <div>
             <h3>Contacto</h3>
-            <ul>
-              <li>Km 24 Carretera Panorámica, San Francisco Chinameca</li>
-              <li><a href="tel:+50376676465">+503 7667-6465</a></li>
-              <li>Lun–Vie 11 a.m. – 7 p.m. </li> 
-              <li>Sáb–Dom 8 a.m. – 9 p.m.</li>
-            </ul>
+            <address>
+              <ul>
+                <li>Km 24 Carretera Panorámica, San Francisco Chinameca</li>
+                <li><a href="tel:+50376676465">+503 7667-6465</a></li>
+                <li>Lun–Vie 11 a.m. – 7 p.m. </li> 
+                <li>Sáb–Dom 8 a.m. – 9 p.m.</li>
+              </ul>
+            </address>
           </div>
         </div>
 

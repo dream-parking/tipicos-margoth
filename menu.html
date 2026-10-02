@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Menú · Café Santa Cruz</title>
   <meta name="description" content="Menú de Café Santa Cruz: café de olla, horchata de morro, pupusas, ceviche, carnes a la parrilla, postres artesanales y cocteles. Vista al Lago de Ilopango.">
+  <link rel="icon" href="img/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
@@ -15,22 +17,22 @@
 <body>
 
     <header class="site-header">
-            <div class="site-header__inner">
-                <div class="site-header__logo">
-                    <img src="img/logo.png" alt="Logo de Café Santa Cruz" class="site-header__logo-image">
-                </div>
-                <nav class="main-nav">
-                    <ul class="nav__list">
-                        <li> <a href="index.html" class="nav__link">Inicio</a></li>
-                        <li><a href="menu.html" class="nav__link" aria-current="page">Menú</a></li>
-                        <li><a href="gallery.html" class="nav__link">Galería</a></li>
-                        <li><a href="contacto.html" class="nav__link">Contacto</a></li>
-                        <li>
-                            <a href="contacto.html" class="nav__cta btn btn--primary ">Pide ahora</a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
+        <div class="site-header__inner">
+            <a href="index.html" class="site-header__logo">
+                <img src="img/logo.webp" alt="Café Santa Cruz, ir al inicio" class="site-header__logo-image" width="192" height="192">
+            </a>
+            <nav class="main-nav" aria-label="Principal">
+                <ul class="nav__list">
+                    <li><a href="index.html" class="nav__link">Inicio</a></li>
+                    <li><a href="menu.html" class="nav__link" aria-current="page">Menú</a></li>
+                    <li><a href="galeria.html" class="nav__link">Galería</a></li>
+                    <li><a href="contacto.html" class="nav__link">Contacto</a></li>
+                    <li class="nav__item--cta">
+                        <a href="contacto.html#reserva" class="nav__cta btn btn--primary">Reservar</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
     <main>
@@ -45,161 +47,179 @@
       </section>
 
       <section class="menu">
+        <div class="container">
 
-        <div class="menu-category">
-          <div class="menu-category__head">
-            <img class="menu-category__icon" src="img/cafeolla.jpg" alt="Café de olla y bebidas calientes">
-            <div class="menu-category__heading">
-              <h2>Café & bebidas calientes</h2>
-              <p class="menu-category__hint">Con grano salvadoreño de altura</p>
+          <div class="menu-category">
+            <div class="menu-category__head">
+              <img class="menu-category__icon" src="img/miniaturas/cafe-de-olla.webp" alt="" width="128" height="128" loading="lazy">
+              <div class="menu-category__heading">
+                <h2>Café & bebidas calientes</h2>
+                <p class="menu-category__hint">Con grano salvadoreño de altura</p>
+              </div>
+            </div>
+            <div class="menu-list">
+              <article class="menu-item">
+                <div class="menu-item__head">
+                  <h3>Café de olla</h3>
+                  <span class="menu-item__tag">Especialidad</span>
+                </div>
+                <p>Café tradicional preparado en olla de barro con canela. El favorito de la casa.</p>
+              </article>
+              <article class="menu-item">
+                <div class="menu-item__head">
+                  <h3>Café de especialidad</h3>
+                </div>
+                <p>Preparaciones de filtro y espresso con grano de altura salvadoreño.</p>
+              </article>
+              <article class="menu-item">
+                <div class="menu-item__head">
+                  <h3>Chocolate caliente</h3>
+                </div>
+                <p>Chocolate artesanal espeso, ideal para la tarde fresca de la montaña.</p>
+              </article>
             </div>
           </div>
-          <div class="menu-list">
-            <article class="menu-item">
-              <div class="menu-item__head">
-                <h3>Café de olla</h3>
-                <span class="menu-item__tag">Especialidad</span>
-              </div>
-              <p>Café tradicional preparado en olla de barro con canela. El favorito de la casa.</p>
-            </article>
-            <article class="menu-item">
-              <div class="menu-item__head">
-                <h3>Café de especialidad</h3>
-              </div>
-              <p>Preparaciones de filtro y espresso con grano de altura salvadoreño.</p>
-            </article>
-            <article class="menu-item">
-              <div class="menu-item__head">
-                <h3>Chocolate caliente</h3>
-              </div>
-              <p>Chocolate artesanal espeso, ideal para la tarde fresca de la montaña.</p>
-            </article>
-          </div>
-        </div>
 
-        <div class="menu-category">
-          <div class="menu-category__head">
-            <img class="menu-category__icon" src="img/horchata.jpeg" alt="Horchata de morro y bebidas frías">
-            <div class="menu-category__heading">
-              <h2>Bebidas frías & cocteles</h2>
-              <p class="menu-category__hint">Para acompañar la vista</p>
+          <div class="menu-category">
+            <div class="menu-category__head">
+              <img class="menu-category__icon" src="img/miniaturas/horchata-de-morro.webp" alt="" width="128" height="128" loading="lazy">
+              <div class="menu-category__heading">
+                <h2>Bebidas frías & cocteles</h2>
+                <p class="menu-category__hint">Para acompañar la vista</p>
+              </div>
+            </div>
+            <div class="menu-list">
+              <article class="menu-item">
+                <div class="menu-item__head">
+                  <h3>Horchata de morro</h3>
+                  <span class="menu-item__tag">La mejor del país</span>
+                </div>
+                <p>Fría y cremosa, con cacao y especias. Muchos la llaman la mejor de El Salvador.</p>
+              </article>
+              <article class="menu-item">
+                <div class="menu-item__head">
+                  <h3>Jugos naturales</h3>
+                </div>
+                <p>Jugos de frutas de la temporada, recién preparados.</p>
+              </article>
+              <article class="menu-item">
+                <div class="menu-item__head">
+                  <h3>Sangría</h3>
+                </div>
+                <p>Sangría de la casa para compartir mientras ves el atardecer.</p>
+              </article>
+              <article class="menu-item">
+                <div class="menu-item__head">
+                  <h3>Mimosa</h3>
+                </div>
+                <p>Espumosa y refrescante, perfecta para el desayuno con vista.</p>
+              </article>
+              <article class="menu-item">
+                <div class="menu-item__head">
+                  <h3>Bellini</h3>
+                </div>
+                <p>Refrescante coctel de durazno, ideal para la tarde.</p>
+              </article>
             </div>
           </div>
-          <div class="menu-list">
-            <article class="menu-item">
-              <div class="menu-item__head">
-                <h3>Horchata de morro</h3>
-                <span class="menu-item__tag">La mejor del país</span>
-              </div>
-              <p>Fría y cremosa, con cacao y especias. Muchos la llaman la mejor de El Salvador.</p>
-            </article>
-            <article class="menu-item">
-              <div class="menu-item__head">
-                <h3>Jugos naturales</h3>
-              </div>
-              <p>Jugos de frutas de la temporada, recién preparados.</p>
-            </article>
-            <article class="menu-item">
-              <div class="menu-item__head">
-                <h3>Sangría</h3>
-              </div>
-              <p>Sangría de la casa para compartir mientras ves el atardecer.</p>
-            </article>
-            <article class="menu-item">
-              <div class="menu-item__head">
-                <h3>Mimosa</h3>
-              </div>
-              <p>Espumosa y refrescante, perfecta para el desayuno con vista.</p>
-            </article>
-            <article class="menu-item">
-              <div class="menu-item__head">
-                <h3>Bellini</h3>
-              </div>
-              <p>Refrescante coctel de durazno, ideal para la tarde.</p>
-            </article>
-          </div>
-        </div>
 
-        <div class="menu-category">
-          <div class="menu-category__head">
-            <img class="menu-category__icon" src="img/comida3.jpg" alt="Comida típica y carnes">
-            <div class="menu-category__heading">
-              <h2>Comida típica & carnes</h2>
-              <p class="menu-category__hint">Platillos fuertes para disfrutar</p>
+          <div class="menu-category">
+            <div class="menu-category__head">
+              <img class="menu-category__icon" src="img/miniaturas/desayunos-tipicos.webp" alt="" width="128" height="128" loading="lazy">
+              <div class="menu-category__heading">
+                <h2>Comida típica & carnes</h2>
+                <p class="menu-category__hint">Platillos fuertes para disfrutar</p>
+              </div>
+            </div>
+            <div class="menu-list">
+              <article class="menu-item">
+                <div class="menu-item__head">
+                  <h3>Desayuno típico</h3>
+                </div>
+                <p>Plátano frito, frijoles, huevos, tamal y pan, acompañado de café de la casa.</p>
+              </article>
+              <article class="menu-item">
+                <div class="menu-item__head">
+                  <h3>Pupusas de la casa</h3>
+                  <span class="menu-item__tag">Recomendado</span>
+                </div>
+                <p>Tradicionales y con variedades especiales. Hechas a mano al momento.</p>
+              </article>
+              <article class="menu-item">
+                <div class="menu-item__head">
+                  <h3>Ceviche</h3>
+                </div>
+                <p>Ceviche fresco, ideal para abrir el apetito con la brisa del lago.</p>
+              </article>
+              <article class="menu-item">
+                <div class="menu-item__head">
+                  <h3>Churrasco</h3>
+                </div>
+                <p>Corte de carne a la parrilla con guarniciones de la casa.</p>
+              </article>
+              <article class="menu-item">
+                <div class="menu-item__head">
+                  <h3>Costilla de cerdo en salsa BBQ</h3>
+                </div>
+                <p>Costilla tierna bañada en salsa barbacoa de la casa.</p>
+              </article>
+              <article class="menu-item">
+                <div class="menu-item__head">
+                  <h3>New York steak</h3>
+                </div>
+                <p>Corte New York a la parrilla, con guarnición a elección.</p>
+              </article>
             </div>
           </div>
-          <div class="menu-list">
-            <article class="menu-item">
-              <div class="menu-item__head">
-                <h3>Pupusas de la casa</h3>
-                <span class="menu-item__tag">Recomendado</span>
-              </div>
-              <p>Tradicionales y con variedades especiales. Hechas a mano al momento.</p>
-            </article>
-            <article class="menu-item">
-              <div class="menu-item__head">
-                <h3>Ceviche</h3>
-              </div>
-              <p>Ceviche fresco, ideal para abrir el apetito con la brisa del lago.</p>
-            </article>
-            <article class="menu-item">
-              <div class="menu-item__head">
-                <h3>Churrasco</h3>
-              </div>
-              <p>Corte de carne a la parrilla con guarniciones de la casa.</p>
-            </article>
-            <article class="menu-item">
-              <div class="menu-item__head">
-                <h3>Costilla de cerdo en salsa BBQ</h3>
-              </div>
-              <p>Costilla tierna bañada en salsa barbacoa de la casa.</p>
-            </article>
-            <article class="menu-item">
-              <div class="menu-item__head">
-                <h3>New York steak</h3>
-              </div>
-              <p>Corte New York a la parrilla, con guarnición a elección.</p>
-            </article>
-          </div>
-        </div>
 
-        <div class="menu-category">
-          <div class="menu-category__head">
-            <img class="menu-category__icon" src="img/tresLeches.jpg" alt="Postres artesanales">
-            <div class="menu-category__heading">
-              <h2>Postres artesanales</h2>
-              <p class="menu-category__hint">Para cerrar con dulce</p>
+          <div class="menu-category">
+            <div class="menu-category__head">
+              <img class="menu-category__icon" src="img/miniaturas/tres-leches.webp" alt="" width="128" height="128" loading="lazy">
+              <div class="menu-category__heading">
+                <h2>Postres artesanales</h2>
+                <p class="menu-category__hint">Para cerrar con dulce</p>
+              </div>
+            </div>
+            <div class="menu-list">
+              <article class="menu-item">
+                <div class="menu-item__head">
+                  <h3>Flan de queso</h3>
+                </div>
+                <p>Flan cremoso de queso con caramelo. Clásico de la casa.</p>
+              </article>
+              <article class="menu-item">
+                <div class="menu-item__head">
+                  <h3>Tres leches de horchata</h3>
+                  <span class="menu-item__tag">Estrella</span>
+                </div>
+                <p>El clásico tres leches con un giro de horchata salvadoreña.</p>
+              </article>
+              <article class="menu-item">
+                <div class="menu-item__head">
+                  <h3>Love cake</h3>
+                </div>
+                <p>Bizcocho húmedo con frutos secos y especias. Para enamorar.</p>
+              </article>
+              <article class="menu-item">
+                <div class="menu-item__head">
+                  <h3>Carrot cheesecake</h3>
+                </div>
+                <p>Cheesecake de zanahoria, cremoso y con ese toque especiado.</p>
+              </article>
             </div>
           </div>
-          <div class="menu-list">
-            <article class="menu-item">
-              <div class="menu-item__head">
-                <h3>Flan de queso</h3>
-              </div>
-              <p>Flan cremoso de queso con caramelo. Clásico de la casa.</p>
-            </article>
-            <article class="menu-item">
-              <div class="menu-item__head">
-                <h3>Tres leches de horchata</h3>
-                <span class="menu-item__tag">Estrella</span>
-              </div>
-              <p>El clásico tres leches con un giro de horchata salvadoreña.</p>
-            </article>
-            <article class="menu-item">
-              <div class="menu-item__head">
-                <h3>Love cake</h3>
-              </div>
-              <p>Bizcocho húmedo con frutos secos y especias. Para enamorar.</p>
-            </article>
-            <article class="menu-item">
-              <div class="menu-item__head">
-                <h3>Carrot cheesecake</h3>
-              </div>
-              <p>Cheesecake de zanahoria, cremoso y con ese toque especiado.</p>
-            </article>
-          </div>
         </div>
+      </section>
 
+      <section class="section section--alt visit">
+        <div class="container">
+          <h2 class="visit__title">¿Ya sabes qué vas a pedir?</h2>
+          <p class="visit__text">
+            Reserva tu mesa con vista y llega entre 4:00 y 5:00 p.m. para disfrutar el atardecer
+            con un café de olla o una horchata de morro.
+          </p>
+          <a href="contacto.html#reserva" class="btn btn--accent">Reservar mesa</a>
+        </div>
       </section>
 
     </main>
@@ -216,25 +236,27 @@
           </div>
 
           <!--Columna 2-->
-          <div>
+          <nav aria-label="Pie de página">
             <h3>Navegación</h3>
             <ul>
               <li><a href="index.html">Inicio</a></li>
               <li><a href="menu.html">Menú</a></li>
-              <li><a href="gallery.html">Galería</a></li>
+              <li><a href="galeria.html">Galería</a></li>
               <li><a href="contacto.html">Contacto</a></li>
             </ul>
-          </div>
+          </nav>
 
           <!--Columna 3-->
           <div>
             <h3>Contacto</h3>
-            <ul>
-              <li>Km 24 Carretera Panorámica, San Francisco Chinameca</li>
-              <li><a href="tel:+50376676465">+503 7667-6465</a></li>
-              <li>Lun–Vie 11 a.m. – 7 p.m.</li>
-              <li>Sáb–Dom 8 a.m. – 9 p.m.</li>
-            </ul>
+            <address>
+              <ul>
+                <li>Km 24 Carretera Panorámica, San Francisco Chinameca</li>
+                <li><a href="tel:+50376676465">+503 7667-6465</a></li>
+                <li>Lun–Vie 11 a.m. – 7 p.m.</li>
+                <li>Sáb–Dom 8 a.m. – 9 p.m.</li>
+              </ul>
+            </address>
           </div>
         </div>
 
