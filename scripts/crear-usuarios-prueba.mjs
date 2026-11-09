@@ -4,15 +4,16 @@
 // El Admin SDK ignora las reglas de seguridad, por eso es la única forma de
 // crear el PRIMER administrador sin pasar por la consola.
 //
-// Uso:
-//   GOOGLE_APPLICATION_CREDENTIALS=/ruta/cuenta-servicio.json \
-//     node scripts/crear-usuarios-prueba.mjs [ruta-salida.csv]
+// Uso (cualquiera de las dos credenciales):
+//   gcloud auth application-default login && node scripts/crear-usuarios-prueba.mjs [salida.csv]
+//   GOOGLE_APPLICATION_CREDENTIALS=/ruta/cuenta-servicio.json node scripts/crear-usuarios-prueba.mjs [salida.csv]
 //
 // Genera contraseñas aleatorias y las escribe SOLO en el CSV de salida
 // (ignorado por git). Nunca subas el CSV ni la cuenta de servicio al repo.
 import { randomInt } from "node:crypto";
 import { writeFileSync, existsSync } from "node:fs";
-import { resolve } from "node:path";
+import { resolve, join } from "node:path";
+import { homedir } from "node:os";
 import { initializeApp, applicationDefault } from "firebase-admin/app";
 import { getAuth } from "firebase-admin/auth";
 import { getFirestore, FieldValue } from "firebase-admin/firestore";
@@ -45,10 +46,18 @@ const csvCampo = (v) => (/[",\n]/.test(String(v)) ? `"${String(v).replace(/"/g, 
 async function main() {
   // Con emuladores (FIREBASE_AUTH_EMULATOR_HOST + FIRESTORE_EMULATOR_HOST) no hace falta credencial.
   const enEmulador = Boolean(process.env.FIREBASE_AUTH_EMULATOR_HOST && process.env.FIRESTORE_EMULATOR_HOST);
+  // Credencial: cuenta de servicio (GOOGLE_APPLICATION_CREDENTIALS) o, si la
+  // organización bloquea las claves, la sesión de gcloud del desarrollador:
+  //   gcloud auth application-default login
+  //   gcloud auth application-default set-quota-project cafe-santa-cruz
+  const adcGcloud = join(homedir(), ".config", "gcloud", "application_default_credentials.json");
   const credencial = process.env.GOOGLE_APPLICATION_CREDENTIALS;
-  if (!enEmulador && (!credencial || !existsSync(credencial))) {
-    console.error("✕ Define GOOGLE_APPLICATION_CREDENTIALS con la ruta a la cuenta de servicio (.json).");
-    console.error("  Consola de Firebase → Configuración del proyecto → Cuentas de servicio → Generar nueva clave privada.");
+  const hayCredencial = credencial ? existsSync(credencial) : existsSync(adcGcloud);
+  if (!enEmulador && !hayCredencial) {
+    console.error("✕ No se encontraron credenciales de Google. Opciones:");
+    console.error("  a) gcloud auth application-default login");
+    console.error("     gcloud auth application-default set-quota-project cafe-santa-cruz");
+    console.error("  b) GOOGLE_APPLICATION_CREDENTIALS=/ruta/cuenta-servicio.json");
     process.exit(1);
   }
 

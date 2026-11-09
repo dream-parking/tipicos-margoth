@@ -144,7 +144,13 @@ npm run test:all     # ambas
 
 - **Reglas:** `npm run deploy:rules` (requiere `firebase login`).
 - **Hosting:** GitHub Pages publica la rama `main` con el dominio de `CNAME`. Ese dominio debe estar en *Firebase Console → Authentication → Settings → Authorized domains*.
-- **Usuarios de prueba:** `npm run seed:usuarios -- ruta/salida.csv` con `GOOGLE_APPLICATION_CREDENTIALS` apuntando a una cuenta de servicio. El script crea o actualiza los usuarios y genera contraseñas nuevas en el CSV.
+- **Usuarios de prueba:** `npm run seed:usuarios -- ruta/salida.csv`. El script crea o actualiza los usuarios y genera contraseñas nuevas en el CSV. Necesita credenciales de Google:
+  - **Opción recomendada:** tu sesión de gcloud. Funciona aunque la organización bloquee las claves de cuentas de servicio:
+    ```bash
+    gcloud auth application-default login
+    gcloud auth application-default set-quota-project cafe-santa-cruz
+    ```
+  - **Alternativa:** `GOOGLE_APPLICATION_CREDENTIALS=/ruta/cuenta-servicio.json`.
 
 ### Seguridad
 
