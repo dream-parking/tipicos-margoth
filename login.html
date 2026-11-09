@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Iniciar sesión · Café Santa Cruz POS</title>
+  <meta name="description" content="Acceso de empleados al punto de venta de Café Santa Cruz.">
+  <link rel="icon" href="img/logoRecortado.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/app.css">
+  <script type="module" src="js/pages/login.js"></script>
+</head>
+<body>
+  <main class="auth-page">
+    <section class="card auth-card" aria-labelledby="titulo-login">
+      <a href="index.html"><img class="auth-card__logo" src="img/logo.png" alt="Café Santa Cruz, ir al sitio público"></a>
+      <h1 id="titulo-login">Acceso de empleados</h1>
+      <p class="auth-card__sub">Ingresa al punto de venta</p>
+
+      <div id="aviso" class="alerta" role="status" hidden></div>
+
+      <form id="form-login" novalidate>
+        <div class="field">
+          <label for="email">Correo electrónico</label>
+          <input class="input" type="email" id="email" name="email" autocomplete="email" required>
+        </div>
+        <div class="field">
+          <label for="password">Contraseña</label>
+          <input class="input" type="password" id="password" name="password" autocomplete="current-password" required>
+        </div>
+        <button class="btn btn--primary btn--block" type="submit">Iniciar sesión</button>
+      </form>
+
+      <p class="auth-card__pie">¿Eres nuevo en el equipo? <a href="registro.html">Crea tu cuenta</a></p>
+    </section>
+  </main>
+</body>
+</html>

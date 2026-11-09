@@ -1,0 +1,19 @@
+{
+  "name": "cafe-santa-cruz-pos",
+  "private": true,
+  "description": "Herramientas de desarrollo (pruebas y scripts). La app es HTML/CSS/JS nativo y no necesita build.",
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/unit/",
+    "test:rules": "firebase emulators:exec --only firestore --project demo-cafe-santa-cruz \"node --test tests/rules/\"",
+    "test:all": "npm test && npm run test:rules",
+    "serve": "npx --yes http-server -c-1 -p 5500 .",
+    "deploy:rules": "firebase deploy --only firestore:rules --project cafe-santa-cruz",
+    "seed:usuarios": "node scripts/crear-usuarios-prueba.mjs"
+  },
+  "devDependencies": {
+    "@firebase/rules-unit-testing": "^4.0.1",
+    "firebase": "^11.0.2",
+    "firebase-admin": "^13.0.0"
+  }
+}
