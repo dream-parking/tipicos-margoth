@@ -277,6 +277,13 @@ img {
   margin-left: var(--space-sm);
 }
 
+/* Botón de acceso al sistema interno (POS). Sigue visible en móvil. */
+.nav__login {
+  padding: 0.6rem 1.2rem;
+  font-size: var(--fs-300);
+  white-space: nowrap;
+}
+
 /* Footer */
 .site-footer {
   background-color: var(--color-secondary);
@@ -419,5 +426,34 @@ img {
 
   .brand {
     font-size: var(--fs-500);
+  }
+
+  /* En móvil el acceso queda como un botón circular con ícono */
+  .nav__login {
+    width: 38px;
+    height: 38px;
+    padding: 0;
+    flex: none;
+  }
+
+  .nav__login-text {
+    display: none;
+  }
+
+  .site-header__logo {
+    flex: none;
+  }
+
+  .site-header__inner {
+    padding-inline: var(--space-sm);
+    gap: var(--space-xs);
+  }
+
+  .site-header .nav__list {
+    gap: 0.6rem;
+  }
+
+  .site-header__logo-image {
+    width: 64px;
   }
 }
