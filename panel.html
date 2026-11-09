@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel · Café Santa Cruz POS</title>
+  <link rel="icon" href="img/logoRecortado.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/app.css">
+  <script type="module" src="js/pages/panel.js"></script>
+</head>
+<body data-auth="pendiente">
+  <header data-app-header></header>
+  <div class="auth-check" aria-hidden="true"><span class="spinner"></span></div>
+
+  <main class="app-main">
+    <div class="app-title">
+      <div>
+        <h1 id="saludo">Panel</h1>
+        <p id="fecha-hoy"></p>
+      </div>
+    </div>
+
+    <div id="aviso" class="alerta" role="status" hidden></div>
+
+    <section aria-labelledby="titulo-accesos">
+      <h2 id="titulo-accesos" class="sr-only">Accesos rápidos</h2>
+      <div id="accesos" class="grid-cards"></div>
+    </section>
+  </main>
+
+  <footer class="app-footer">© 2026 Café Santa Cruz · Punto de venta</footer>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crear cuenta · Café Santa Cruz POS</title>
+  <meta name="description" content="Registro de empleados del punto de venta de Café Santa Cruz.">
+  <link rel="icon" href="img/logoRecortado.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/app.css">
+  <script type="module" src="js/pages/registro.js"></script>
+</head>
+<body>
+  <main class="auth-page">
+    <section class="card auth-card" aria-labelledby="titulo-registro">
+      <a href="index.html"><img class="auth-card__logo" src="img/logo.png" alt="Café Santa Cruz, ir al sitio público"></a>
+      <h1 id="titulo-registro">Crear cuenta</h1>
+      <p class="auth-card__sub">Tu cuenta quedará pendiente hasta que un administrador la active.</p>
+
+      <form id="form-registro" novalidate>
+        <div class="field">
+          <label for="nombre">Nombre completo</label>
+          <input class="input" type="text" id="nombre" name="nombre" autocomplete="name" maxlength="80" required>
+        </div>
+        <div class="field">
+          <label for="email">Correo electrónico</label>
+          <input class="input" type="email" id="email" name="email" autocomplete="email" required>
+        </div>
+        <div class="field">
+          <label for="password">Contraseña</label>
+          <input class="input" type="password" id="password" name="password" autocomplete="new-password" minlength="6" required aria-describedby="password-hint">
+          <p class="field__hint" id="password-hint">Mínimo 6 caracteres.</p>
+        </div>
+        <div class="field">
+          <label for="confirmacion">Confirmar contraseña</label>
+          <input class="input" type="password" id="confirmacion" name="confirmacion" autocomplete="new-password" required>
+        </div>
+        <button class="btn btn--primary btn--block" type="submit">Crear cuenta</button>
+      </form>
+
+      <p class="auth-card__pie">¿Ya tienes cuenta? <a href="login.html">Inicia sesión</a></p>
+    </section>
+  </main>
+</body>
+</html>
