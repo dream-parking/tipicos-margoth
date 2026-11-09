@@ -1,0 +1,167 @@
+rules_version = '2';
+
+// Reglas de seguridad — Café Santa Cruz POS
+// Roles: "admin" y "cajero". Todo usuario registrado nace como cajero INACTIVO.
+// Las reglas son la única barrera real: ocultar botones en la interfaz no basta.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ───────── Helpers ─────────
+    function autenticado() {
+      return request.auth != null;
+    }
+
+    function perfilRef() {
+      return /databases/$(database)/documents/usuarios/$(request.auth.uid);
+    }
+
+    function perfil() {
+      return get(perfilRef()).data;
+    }
+
+    // Empleado con perfil existente y activado por un admin.
+    function activo() {
+      return autenticado() && exists(perfilRef()) && perfil().activo == true;
+    }
+
+    function esAdmin() {
+      return activo() && perfil().rol == 'admin';
+    }
+
+    function esCajero() {
+      return activo() && perfil().rol == 'cajero';
+    }
+
+    // Campos que cambian en un update.
+    function cambios() {
+      return request.resource.data.diff(resource.data).affectedKeys();
+    }
+
+    function nombreValido(n) {
+      return n is string && n.size() >= 2 && n.size() <= 80;
+    }
+
+    // ───────── usuarios/{uid} ─────────
+    // { nombre, email, rol: "admin"|"cajero", activo: bool, creado: timestamp }
+    match /usuarios/{uid} {
+      // Cada quien lee su propio perfil (aunque esté inactivo, para saberlo);
+      // el admin lee y lista todos.
+      allow read: if (autenticado() && request.auth.uid == uid) || esAdmin();
+
+      // Registro: solo el propio usuario, y SIEMPRE como cajero inactivo.
+      allow create: if autenticado()
+        && request.auth.uid == uid
+        && request.resource.data.keys().hasOnly(['nombre', 'email', 'rol', 'activo', 'creado'])
+        && nombreValido(request.resource.data.nombre)
+        && request.resource.data.email == request.auth.token.email
+        && request.resource.data.rol == 'cajero'
+        && request.resource.data.activo == false
+        && request.resource.data.creado == request.time;
+
+      // Admin: cambia rol/activo de OTROS empleados (nunca el suyo).
+      // Usuario: solo puede cambiar su nombre.
+      allow update: if (
+          esAdmin()
+          && request.auth.uid != uid
+          && cambios().hasOnly(['rol', 'activo'])
+          && request.resource.data.rol in ['admin', 'cajero']
+          && request.resource.data.activo is bool
+        ) || (
+          autenticado()
+          && request.auth.uid == uid
+          && cambios().hasOnly(['nombre'])
+          && nombreValido(request.resource.data.nombre)
+        );
+
+      allow delete: if false;
+    }
+
+    // ───────── productos/{id} ─────────
+    // { nombre, descripcion, precio, categoria, imagen, disponible,
+    //   controlaStock, stock, stockMinimo }
+    function productoValido(p) {
+      return p.keys().hasAll(['nombre', 'precio', 'categoria', 'disponible'])
+        && p.nombre is string && p.nombre.size() >= 2 && p.nombre.size() <= 80
+        && (p.precio is int || p.precio is float) && p.precio > 0
+        && p.categoria is string && p.categoria.size() > 0
+        && p.disponible is bool
+        && (!('stock' in p) || (p.stock is int && p.stock >= 0));
+    }
+
+    match /productos/{productoId} {
+      // El menú público y el POS leen el catálogo sin restricción.
+      allow read: if true;
+
+      allow create: if esAdmin() && productoValido(request.resource.data);
+      allow delete: if esAdmin();
+
+      // Admin: cualquier cambio válido (incluye devolver stock al anular).
+      // Cajero activo: solo puede BAJAR el stock (al vender), nunca subirlo
+      // ni tocar precio, nombre, etc.
+      allow update: if (esAdmin() && productoValido(request.resource.data))
+        || (
+          esCajero()
+          && cambios().hasOnly(['stock'])
+          && resource.data.get('controlaStock', false) == true
+          && request.resource.data.stock is int
+          && request.resource.data.stock >= 0
+          && request.resource.data.stock < resource.data.stock
+        );
+    }
+
+    // ───────── ventas/{id} ─────────
+    // { cajeroId, cajeroNombre, items[], subtotal, descuento, total, metodoPago,
+    //   efectivoRecibido, cambio, estado: "pagada"|"anulada", motivoAnulacion, creado }
+    match /ventas/{ventaId} {
+      // Cualquier empleado activo (cajero o admin) registra ventas a su nombre.
+      allow create: if activo()
+        && request.resource.data.cajeroId == request.auth.uid
+        && request.resource.data.estado == 'pagada'
+        && request.resource.data.items is list
+        && request.resource.data.items.size() > 0
+        && (request.resource.data.total is int || request.resource.data.total is float)
+        && request.resource.data.total >= 0
+        && request.resource.data.metodoPago in ['efectivo', 'tarjeta'];
+
+      // El cajero solo ve sus ventas (las consultas deben filtrar por cajeroId);
+      // el admin ve todas.
+      allow read: if esAdmin()
+        || (activo() && resource.data.cajeroId == request.auth.uid);
+
+      // Solo el admin anula, una única vez, y solo puede tocar campos de anulación.
+      allow update: if esAdmin()
+        && resource.data.estado == 'pagada'
+        && request.resource.data.estado == 'anulada'
+        && cambios().hasOnly(['estado', 'motivoAnulacion', 'anuladoPor', 'anuladoEn'])
+        && request.resource.data.motivoAnulacion is string
+        && request.resource.data.motivoAnulacion.size() >= 3;
+
+      // Las ventas nunca se borran (trazabilidad).
+      allow delete: if false;
+    }
+
+    // ───────── cierres/{cajeroId_fecha} ─────────
+    // { cajeroId, fecha: "YYYY-MM-DD", ventasCount, totalEfectivo, totalTarjeta,
+    //   efectivoContado, diferencia, creado }
+    // El ID del documento es "<uid>_<fecha>", así un cajero no puede hacer dos
+    // cierres el mismo día (el segundo sería un update, que está prohibido).
+    match /cierres/{cierreId} {
+      allow create: if activo()
+        && request.resource.data.cajeroId == request.auth.uid
+        && request.resource.data.fecha is string
+        && cierreId == request.auth.uid + '_' + request.resource.data.fecha
+        && (request.resource.data.efectivoContado is int || request.resource.data.efectivoContado is float)
+        && request.resource.data.efectivoContado >= 0;
+
+      allow read: if esAdmin()
+        || (activo() && resource.data.cajeroId == request.auth.uid);
+
+      allow update, delete: if false;
+    }
+
+    // Cualquier otra colección queda cerrada.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

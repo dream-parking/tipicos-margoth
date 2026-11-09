@@ -1,0 +1,20 @@
+# Dependencias de desarrollo
+node_modules/
+
+# Credenciales y secretos — NUNCA al repositorio
+usuarios-prueba.csv
+*.csv
+serviceAccount*.json
+*-firebase-adminsdk-*.json
+credenciales/
+.env
+.env.*
+
+# Logs de Firebase / emuladores
+firebase-debug.log
+firestore-debug.log
+ui-debug.log
+.firebase/
+
+# Sistema
+.DS_Store
