@@ -99,3 +99,47 @@ describe("validarRegistro", () => {
     assert.equal(r.errores.confirmacion, "Las contraseñas no coinciden.");
   });
 });
+
+describe("esquemaNuevoEmpleado (alta hecha por un admin)", async () => {
+  const { validar, esquemaNuevoEmpleado } = await import("../../js/ui/validation.js");
+  const base = { nombre: "Ana López", email: "ana@cafe.com", password: "Temp2345", rol: "cajero" };
+
+  it("acepta un alta válida", () => {
+    assert.equal(validar(base, esquemaNuevoEmpleado).valido, true);
+  });
+  it("rechaza roles fuera de la lista", () => {
+    assert.ok(validar({ ...base, rol: "dueño" }, esquemaNuevoEmpleado).errores.rol);
+  });
+  it("exige contraseña temporal de 6+ caracteres", () => {
+    assert.ok(validar({ ...base, password: "abc" }, esquemaNuevoEmpleado).errores.password);
+  });
+  it("exige nombre y correo válidos", () => {
+    const { errores } = validar({ ...base, nombre: "", email: "x" }, esquemaNuevoEmpleado);
+    assert.ok(errores.nombre);
+    assert.ok(errores.email);
+  });
+});
+
+describe("generarPasswordTemporal", async () => {
+  const { generarPasswordTemporal, PASSWORD_MIN } = await import("../../js/ui/validation.js");
+
+  it("genera el largo pedido y cumple el mínimo de Firebase", () => {
+    const p = generarPasswordTemporal();
+    assert.equal(p.length, 10);
+    assert.ok(p.length >= PASSWORD_MIN);
+    assert.equal(generarPasswordTemporal(14).length, 14);
+  });
+  it("incluye mayúscula, minúscula y dígito, sin caracteres ambiguos", () => {
+    for (let i = 0; i < 50; i++) {
+      const p = generarPasswordTemporal();
+      assert.match(p, /[A-Z]/);
+      assert.match(p, /[a-z]/);
+      assert.match(p, /[2-9]/);
+      assert.doesNotMatch(p, /[0O1lIo]/);
+    }
+  });
+  it("es determinista con un generador inyectado", () => {
+    const fijo = () => 0;
+    assert.equal(generarPasswordTemporal(6, fijo), generarPasswordTemporal(6, fijo));
+  });
+});

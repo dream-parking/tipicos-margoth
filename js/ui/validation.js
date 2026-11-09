@@ -93,5 +93,36 @@ export const esquemaRegistro = {
   ],
 };
 
+/** Alta de un empleado hecha por un admin (contraseña temporal + rol). */
+export const esquemaNuevoEmpleado = {
+  nombre: [
+    reglas.requerido("Ingresa el nombre del empleado."),
+    reglas.minLongitud(2, "El nombre debe tener al menos 2 caracteres."),
+    reglas.maxLongitud(80, "El nombre debe tener como máximo 80 caracteres."),
+  ],
+  email: [reglas.requerido("Ingresa el correo del empleado."), reglas.email()],
+  password: [
+    reglas.requerido("Define una contraseña temporal."),
+    reglas.minLongitud(PASSWORD_MIN, `La contraseña debe tener al menos ${PASSWORD_MIN} caracteres.`),
+  ],
+  rol: [reglas.requerido("Elige un rol."), reglas.enLista(["admin", "cajero"], "Rol no válido.")],
+};
+
+/**
+ * Contraseña temporal legible para dictar o copiar: sin caracteres ambiguos
+ * (0/O, 1/l/I). `aleatorio(n)` devuelve un entero en [0, n) (inyectable en pruebas).
+ */
+export function generarPasswordTemporal(largo = 10, aleatorio = (n) => crypto.getRandomValues(new Uint32Array(1))[0] % n) {
+  const grupos = ["ABCDEFGHJKMNPQRSTUVWXYZ", "abcdefghjkmnpqrstuvwxyz", "23456789"];
+  const todos = grupos.join("");
+  const chars = grupos.map((g) => g[aleatorio(g.length)]);
+  while (chars.length < largo) chars.push(todos[aleatorio(todos.length)]);
+  for (let i = chars.length - 1; i > 0; i--) {
+    const j = aleatorio(i + 1);
+    [chars[i], chars[j]] = [chars[j], chars[i]];
+  }
+  return chars.join("");
+}
+
 export const validarLogin = (valores) => validar(valores, esquemaLogin);
 export const validarRegistro = (valores) => validar(valores, esquemaRegistro);

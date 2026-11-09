@@ -1,7 +1,7 @@
 // empleados.js — Gestión de empleados (solo admin): lista, búsqueda, filtros,
-// activar/desactivar y cambio de rol.
+// alta de cuentas, activar/desactivar y cambio de rol.
 import { requireRole } from "../core/guards.js";
-import { listarUsuarios, cambiarRol, cambiarEstado } from "../services/usuarios.js";
+import { listarUsuarios, cambiarRol, cambiarEstado, crearEmpleado } from "../services/usuarios.js";
 import { traducirError } from "../services/auth-errores.js";
 import {
   filtrarEmpleados,
@@ -18,6 +18,12 @@ import {
   toastExito,
   toastError,
   leerFormulario,
+  validarFormulario,
+  mostrarErrores,
+  limpiarErrores,
+  conCargando,
+  esquemaNuevoEmpleado,
+  generarPasswordTemporal,
   formatearFecha,
   iniciales,
 } from "../ui/index.js";
@@ -241,6 +247,74 @@ async function onCambiarEstado(empleado, boton) {
     render();
   }
 }
+
+// ───────── Crear cuenta ─────────
+const dlgCrear = document.getElementById("dlg-crear");
+const formCrear = document.getElementById("form-crear");
+
+function abrirCrear() {
+  formCrear.reset();
+  limpiarErrores(formCrear);
+  formCrear.password.value = generarPasswordTemporal();
+  dlgCrear.showModal();
+  formCrear.nombre.focus();
+}
+
+function cerrarCrear() {
+  dlgCrear.close();
+}
+
+formCrear.addEventListener("submit", async (evento) => {
+  evento.preventDefault();
+  const datos = validarFormulario(formCrear, esquemaNuevoEmpleado);
+  if (!datos) return;
+
+  // Regla de negocio: el correo no puede repetirse en el equipo.
+  const correo = datos.email.toLowerCase();
+  if (empleados.some((e) => e.email?.toLowerCase() === correo)) {
+    mostrarErrores(formCrear, { email: "Ya hay un empleado con ese correo." });
+    return;
+  }
+
+  const boton = formCrear.querySelector('button[type="submit"]');
+  try {
+    const nuevo = await conCargando(
+      boton,
+      () => crearEmpleado({ ...datos, email: correo, activo: datos.activo === true }),
+      "Creando…"
+    );
+    empleados.push(nuevo);
+    cerrarCrear();
+    render();
+    toastExito(
+      nuevo.activo
+        ? `Cuenta de ${nuevo.nombre} creada y activa.`
+        : `Cuenta de ${nuevo.nombre} creada. Queda pendiente de activación.`,
+      6000
+    );
+  } catch (error) {
+    console.error(error);
+    if (error.parcial) {
+      // La cuenta existe, pero no se pudo aplicar el rol/estado.
+      cerrarCrear();
+      toastError("La cuenta se creó, pero quedó como cajero pendiente. Ajusta su rol y estado en la lista.");
+      cargar();
+    } else if (error.code === "auth/email-already-in-use" || error.code === "auth/invalid-email") {
+      mostrarErrores(formCrear, { email: traducirError(error) });
+    } else if (error.code === "auth/weak-password") {
+      mostrarErrores(formCrear, { password: traducirError(error) });
+    } else {
+      toastError(traducirError(error));
+    }
+  }
+});
+
+document.getElementById("btn-crear").addEventListener("click", abrirCrear);
+document.getElementById("btn-cancelar-crear").addEventListener("click", cerrarCrear);
+document.getElementById("btn-generar").addEventListener("click", () => {
+  formCrear.password.value = generarPasswordTemporal();
+  formCrear.password.select();
+});
 
 // ───────── Eventos ─────────
 filtros.addEventListener("input", render);

@@ -186,6 +186,15 @@ describe("usuarios", () => {
     await assertSucceeds(getDocs(collection(db("admin"), "usuarios")));
   });
 
+  it("alta hecha por el admin: la cuenta nueva crea su perfil y el admin le asigna rol y estado", async () => {
+    // Paso 1: la instancia temporal (sesión de la cuenta nueva) crea su perfil.
+    await assertSucceeds(setDoc(doc(db("nuevo"), "usuarios", "nuevo"), nuevoPerfil()));
+    // Paso 2: el admin, con su sesión, la activa como admin.
+    await assertSucceeds(updateDoc(doc(db("admin"), "usuarios", "nuevo"), { rol: "admin", activo: true }));
+    // Un cajero no puede hacer el paso 2.
+    await assertFails(updateDoc(doc(db("cajero"), "usuarios", "nuevo"), { activo: false }));
+  });
+
   it("nadie puede borrar perfiles", async () => {
     await assertFails(deleteDoc(doc(db("admin"), "usuarios", "cajero")));
     await assertFails(deleteDoc(doc(db("cajero"), "usuarios", "cajero")));

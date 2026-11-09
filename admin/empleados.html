@@ -23,10 +23,16 @@
         <h1>Empleados</h1>
         <p>Activa las cuentas nuevas y asigna los roles del equipo.</p>
       </div>
-      <button type="button" id="btn-recargar" class="btn btn--light btn--sm">
-        <svg class="btn__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7"/></svg>
-        Actualizar
-      </button>
+      <div class="app-title__acciones">
+        <button type="button" id="btn-recargar" class="btn btn--light">
+          <svg class="btn__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7"/></svg>
+          Actualizar
+        </button>
+        <button type="button" id="btn-crear" class="btn btn--primary" aria-haspopup="dialog">
+          <svg class="btn__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+          Crear cuenta
+        </button>
+      </div>
     </div>
 
     <section aria-label="Resumen del equipo" class="stats" id="resumen"></section>
@@ -53,6 +59,50 @@
       <div id="lista" class="tabla-wrap"></div>
     </section>
   </main>
+
+
+  <dialog class="modal modal--form" id="dlg-crear" aria-labelledby="dlg-crear-titulo">
+    <form id="form-crear" novalidate>
+      <p class="eyebrow">Nuevo empleado</p>
+      <h2 class="modal__titulo" id="dlg-crear-titulo">Crear cuenta</h2>
+      <p class="modal__mensaje">Comparte el correo y la contraseña temporal con la persona. Podrá usarlos para iniciar sesión de inmediato si la cuenta queda activa.</p>
+
+      <div class="field">
+        <label for="nuevo-nombre">Nombre completo</label>
+        <input class="input" type="text" id="nuevo-nombre" name="nombre" autocomplete="off" maxlength="80" required>
+      </div>
+      <div class="field">
+        <label for="nuevo-email">Correo electrónico</label>
+        <input class="input" type="email" id="nuevo-email" name="email" autocomplete="off" placeholder="nombre@cafesantacruz.com" required>
+      </div>
+      <div class="field">
+        <label for="nuevo-password">Contraseña temporal</label>
+        <div class="campo-con-boton">
+          <input class="input mono" type="text" id="nuevo-password" name="password" autocomplete="new-password" spellcheck="false" minlength="6" required aria-describedby="nuevo-password-hint">
+          <button type="button" class="btn btn--light" id="btn-generar">Generar</button>
+        </div>
+        <p class="field__hint" id="nuevo-password-hint">Mínimo 6 caracteres · se muestra para que puedas copiarla</p>
+      </div>
+      <div class="campos-fila">
+        <div class="field">
+          <label for="nuevo-rol">Rol</label>
+          <select class="select" id="nuevo-rol" name="rol">
+            <option value="cajero">Cajero</option>
+            <option value="admin">Administrador</option>
+          </select>
+        </div>
+        <label class="check" for="nuevo-activo">
+          <input type="checkbox" id="nuevo-activo" name="activo" checked>
+          <span>Activar de inmediato</span>
+        </label>
+      </div>
+
+      <div class="modal__acciones">
+        <button type="button" class="btn btn--light" id="btn-cancelar-crear">Cancelar</button>
+        <button type="submit" class="btn btn--primary">Crear cuenta</button>
+      </div>
+    </form>
+  </dialog>
 
   <footer class="app-footer"><span>© 2026 Café Santa Cruz</span><span>POS · v1.0</span></footer>
 </body>

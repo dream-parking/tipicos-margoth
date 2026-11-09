@@ -207,6 +207,7 @@ body:not([data-auth="pendiente"]) .auth-check { display: none; }
 }
 .app-title h1 { font-size: clamp(40px, 6vw, 56px); margin-top: var(--s-12); }
 .app-title p:not(.eyebrow) { margin-top: var(--s-12); font-size: 16px; max-width: 52ch; }
+.app-title__acciones { display: flex; gap: var(--s-8); flex-wrap: wrap; }
 .app-footer {
   max-width: var(--container); margin-inline: auto; padding: var(--s-24);
   display: flex; justify-content: space-between; gap: var(--s-16); flex-wrap: wrap;
@@ -301,6 +302,11 @@ a.modulo:focus-visible { border-radius: var(--r-card); }
 .field__error { color: var(--danger); font-size: 13px; }
 .field__error::before { content: "↳ "; font-family: var(--font-mono); }
 .field__hint { font: 400 12px/1.4 var(--font-mono); color: var(--slate); }
+.campo-con-boton { display: flex; gap: var(--s-8); }
+.campo-con-boton .input { flex: 1; min-width: 0; }
+.campos-fila { display: grid; grid-template-columns: 1fr auto; gap: var(--s-16); align-items: end; }
+.check { display: flex; align-items: center; gap: var(--s-8); height: 44px; margin-bottom: var(--s-16); font-size: 14px; color: var(--charcoal); cursor: pointer; }
+.check input { width: 18px; height: 18px; accent-color: var(--graphite); cursor: pointer; }
 
 .toolbar { display: flex; gap: var(--s-8); flex-wrap: wrap; align-items: center; padding: var(--s-16); border-bottom: 1px solid var(--steel); }
 .toolbar .input { flex: 1 1 260px; }
@@ -414,6 +420,10 @@ a.modulo:focus-visible { border-radius: var(--r-card); }
 .modal__titulo { font-size: 28px; letter-spacing: -0.035em; margin-bottom: var(--s-12); }
 .modal__mensaje { font-size: 15px; margin-bottom: var(--s-24); }
 .modal__acciones { display: flex; justify-content: flex-end; gap: var(--s-8); flex-wrap: wrap; }
+.modal--form { width: min(480px, calc(100vw - 32px)); }
+.modal--form .modal__titulo { margin-top: var(--s-8); }
+.modal--form .modal__mensaje { font-size: 14px; margin-bottom: var(--s-24); }
+.modal--form .modal__acciones { margin-top: var(--s-8); padding-top: var(--s-16); border-top: 1px solid var(--steel); }
 
 /* ───────── Acceso (login / registro) ───────── */
 .acceso { min-height: 100vh; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); }
@@ -501,6 +511,9 @@ a.modulo:focus-visible { border-radius: var(--r-card); }
   .toolbar .select { flex: 1 1 0; min-width: 0; }
   .modulo { min-height: 0; }
   .modulo h2 { margin-top: var(--s-16); }
+  .app-title__acciones { width: 100%; }
+  .app-title__acciones .btn { flex: 1; }
+  .campos-fila { grid-template-columns: 1fr; gap: 0; }
   .app-main { padding: var(--s-32) var(--s-16) var(--s-56); }
   .app-title { margin-bottom: var(--s-24); padding-bottom: var(--s-24); }
   .stat { padding: var(--s-16); }

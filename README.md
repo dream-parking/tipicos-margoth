@@ -113,7 +113,7 @@ Para agregar la página al menú, añade una entrada a `NAVEGACION` en `js/ui/he
 ## Cómo probar la aplicación
 
 1. Entra a **/login.html**. Las credenciales de prueba (un admin, dos cajeros activos y uno pendiente) se entregan **por Moodle**. No están en el repositorio.
-2. **Como admin:** en *Empleados*, busca y filtra. Activa la cuenta pendiente o cambia el rol de un cajero. Intenta modificarte a ti mismo y verás que no se permite.
+2. **Como admin:** en *Empleados*, busca y filtra. Activa la cuenta pendiente o cambia el rol de un cajero. Intenta modificarte a ti mismo y verás que no se permite. Con **Crear cuenta** das de alta a un empleado nuevo: le pones contraseña temporal, rol y si queda activo, y tu sesión no se cierra.
 3. **Como cajero:** comprueba que no aparece *Empleados* y que al abrir `/admin/empleados.html` directamente te redirige al panel.
 4. **Como el usuario pendiente:** el login avisa "pendiente de activación" y no da acceso.
 5. **Registro:** en */registro.html* crea una cuenta. Queda pendiente hasta que un admin la active.
