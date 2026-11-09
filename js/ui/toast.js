@@ -13,7 +13,7 @@ function obtenerContenedor() {
   return contenedor;
 }
 
-const ICONOS = { info: "ℹ", exito: "✓", error: "✕", aviso: "!" };
+const ICONOS = { info: "i", exito: "✓", error: "×", aviso: "!" };
 
 export function toast(mensaje, tipo = "info", duracion = 3500) {
   const nodo = document.createElement("div");

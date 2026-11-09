@@ -8,6 +8,7 @@
     "test:rules": "firebase emulators:exec --only firestore --project demo-cafe-santa-cruz \"node --test tests/rules/\"",
     "test:all": "npm test && npm run test:rules",
     "serve": "npx --yes http-server -c-1 -p 5500 .",
+    "emuladores": "firebase emulators:start --only auth,firestore --project cafe-santa-cruz",
     "deploy:rules": "firebase deploy --only firestore:rules --project cafe-santa-cruz",
     "seed:usuarios": "node scripts/crear-usuarios-prueba.mjs"
   },

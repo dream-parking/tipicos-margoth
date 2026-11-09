@@ -1,6 +1,15 @@
 // estados.js — Representaciones de carga, vacío y error dentro de un contenedor,
 // y un helper para botones que ejecutan operaciones asíncronas.
 
+// Íconos de trazo por defecto. `icono` también acepta un SVG propio (string de
+// confianza, escrito en el código) o un texto corto.
+const svgIcono = (trazo) =>
+  `<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${trazo}</svg>`;
+export const ICONOS_ESTADO = {
+  vacio: svgIcono('<path d="M4 7h16v12H4zM4 7l2-3h12l2 3M9 11h6"/>'),
+  error: svgIcono('<path d="M12 8v5M12 16.5v.01"/><circle cx="12" cy="12" r="9"/>'),
+};
+
 function crearBloque(clase, { icono, titulo, mensaje }) {
   const bloque = document.createElement("div");
   bloque.className = `estado ${clase}`;
@@ -8,7 +17,8 @@ function crearBloque(clase, { icono, titulo, mensaje }) {
     const i = document.createElement("div");
     i.className = "estado__icono";
     i.setAttribute("aria-hidden", "true");
-    i.textContent = icono;
+    if (icono.trim().startsWith("<svg")) i.innerHTML = icono;
+    else i.textContent = icono;
     bloque.append(i);
   }
   if (titulo) {
@@ -43,7 +53,7 @@ export function mostrarCargando(contenedor, texto = "Cargando…") {
 }
 
 /** Mensaje cuando no hay datos que mostrar. */
-export function mostrarVacio(contenedor, { titulo = "No hay datos", mensaje = "", icono = "☕" } = {}) {
+export function mostrarVacio(contenedor, { titulo = "No hay datos", mensaje = "", icono = ICONOS_ESTADO.vacio } = {}) {
   contenedor.removeAttribute("aria-busy");
   contenedor.replaceChildren(crearBloque("estado--vacio", { icono, titulo, mensaje }));
 }
@@ -51,12 +61,12 @@ export function mostrarVacio(contenedor, { titulo = "No hay datos", mensaje = ""
 /** Mensaje de error con botón opcional de reintento. */
 export function mostrarError(contenedor, { titulo = "Algo salió mal", mensaje = "", reintentar } = {}) {
   contenedor.removeAttribute("aria-busy");
-  const bloque = crearBloque("estado--error", { icono: "⚠", titulo, mensaje });
+  const bloque = crearBloque("estado--error", { icono: ICONOS_ESTADO.error, titulo, mensaje });
   bloque.setAttribute("role", "alert");
   if (reintentar) {
     const btn = document.createElement("button");
     btn.type = "button";
-    btn.className = "btn btn--secondary btn--sm";
+    btn.className = "btn btn--light btn--sm";
     btn.textContent = "Reintentar";
     btn.addEventListener("click", reintentar);
     bloque.append(btn);

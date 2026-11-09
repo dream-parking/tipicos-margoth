@@ -8,35 +8,79 @@
   <link rel="icon" href="img/logoRecortado.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@400&family=Inter+Tight:wght@500&family=Inter:wght@500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/reset.css">
-  <link rel="stylesheet" href="css/global.css">
   <link rel="stylesheet" href="css/app.css">
   <script type="module" src="js/pages/login.js"></script>
 </head>
 <body>
-  <main class="auth-page">
-    <section class="card auth-card" aria-labelledby="titulo-login">
-      <a href="index.html"><img class="auth-card__logo" src="img/logo.png" alt="Café Santa Cruz, ir al sitio público"></a>
-      <h1 id="titulo-login">Acceso de empleados</h1>
-      <p class="auth-card__sub">Ingresa al punto de venta</p>
+  <main class="acceso">
+    <section class="acceso__form" aria-labelledby="titulo-login">
+      <a class="acceso__marca" href="index.html">
+        <img src="img/logoRecortado.png" alt="">
+        <span>Café Santa Cruz</span>
+      </a>
 
-      <div id="aviso" class="alerta" role="status" hidden></div>
+      <div class="acceso__cuerpo">
+        <p class="eyebrow">Punto de venta · Empleados</p>
+        <h1 id="titulo-login">Abre tu turno.</h1>
+        <p class="acceso__sub">Ingresa con tu correo para cobrar, cerrar caja y ver tus ventas.</p>
 
-      <form id="form-login" novalidate>
-        <div class="field">
-          <label for="email">Correo electrónico</label>
-          <input class="input" type="email" id="email" name="email" autocomplete="email" required>
-        </div>
-        <div class="field">
-          <label for="password">Contraseña</label>
-          <input class="input" type="password" id="password" name="password" autocomplete="current-password" required>
-        </div>
-        <button class="btn btn--primary btn--block" type="submit">Iniciar sesión</button>
-      </form>
+        <div id="aviso" class="alerta" role="status" hidden></div>
 
-      <p class="auth-card__pie">¿Eres nuevo en el equipo? <a href="registro.html">Crea tu cuenta</a></p>
+        <form id="form-login" novalidate>
+          <div class="field">
+            <label for="email">Correo electrónico</label>
+            <input class="input" type="email" id="email" name="email" autocomplete="email" placeholder="nombre@cafesantacruz.com" required>
+          </div>
+          <div class="field">
+            <label for="password">Contraseña</label>
+            <input class="input" type="password" id="password" name="password" autocomplete="current-password" required>
+          </div>
+          <button class="btn btn--primary btn--lg btn--block" type="submit">
+            Iniciar sesión
+            <svg class="btn__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+        </form>
+
+        <p class="acceso__pie">¿Eres nuevo en el equipo? <a href="registro.html">Crea tu cuenta</a></p>
+      </div>
+
+      <p class="acceso__legal"><a href="index.html">← Volver al sitio</a> · Km 24 Carretera Panorámica</p>
     </section>
+
+    <div class="acceso__visual" aria-hidden="true">
+      <div class="diagrama">
+        <div class="diagrama__lienzo">
+          <div class="hoja hoja--a">
+            <p class="hoja__etiqueta">Catálogo · 24 productos</p>
+            <div class="hoja__linea"></div>
+            <div class="hoja__linea hoja__linea--media"></div>
+            <div class="hoja__linea hoja__linea--corta"></div>
+            <div class="hoja__linea"></div>
+            <div class="hoja__linea hoja__linea--media"></div>
+          </div>
+          <div class="hoja hoja--b">
+            <p class="hoja__etiqueta">Cierre de caja · turno A</p>
+            <div class="hoja__linea hoja__linea--media"></div>
+            <div class="hoja__linea"></div>
+            <div class="hoja__linea hoja__linea--corta"></div>
+            <div class="hoja__linea hoja__linea--media"></div>
+          </div>
+          <div class="ticket">
+            <div class="ticket__cabeza"><span>Ticket #0142</span><span class="ticket__vivo">En caja</span></div>
+            <div class="ticket__fila"><span>2 × Café de olla</span><span>$5.00</span></div>
+            <div class="ticket__fila"><span>1 × Pupusas mixtas</span><span>$3.50</span></div>
+            <div class="ticket__fila"><span>1 × Horchata de morro</span><span>$2.25</span></div>
+            <div class="ticket__total"><span>Total</span><span>$10.75</span></div>
+            <div class="ticket__barra"></div>
+          </div>
+          <span class="chip chip--1 chip--signal">Venta registrada</span>
+          <span class="chip chip--2 chip--accent">Stock −2</span>
+          <span class="chip chip--3">Mesa 4 · Efectivo</span>
+        </div>
+      </div>
+    </div>
   </main>
 </body>
 </html>

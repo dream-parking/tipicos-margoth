@@ -61,7 +61,7 @@ function render() {
     return;
   }
   if (visibles.length === 0) {
-    mostrarVacio(lista, { icono: "🔍", titulo: "Sin resultados", mensaje: "Prueba con otra búsqueda o filtro." });
+    mostrarVacio(lista, { icono: ICONO_BUSCAR, titulo: "Sin resultados", mensaje: "Prueba con otra búsqueda o quita los filtros." });
     return;
   }
 
@@ -84,19 +84,29 @@ function renderResumen() {
   const datos = [
     ["Empleados", r.total],
     ["Activos", r.activos],
-    ["Pendientes de activación", r.pendientes],
+    ["Pendientes", r.pendientes],
     ["Administradores", r.admins],
   ];
   resumen.replaceChildren(
     ...datos.map(([label, valor]) => {
       const card = document.createElement("div");
-      card.className = "card stat";
-      card.innerHTML = `<div class="stat__valor"></div><div class="stat__label"></div>`;
+      card.className = label === "Pendientes" && valor > 0 ? "stat stat--alerta" : "stat";
+      card.innerHTML = `<div class="stat__label"></div><div class="stat__valor"></div>`;
       card.querySelector(".stat__valor").textContent = valor;
       card.querySelector(".stat__label").textContent = label;
       return card;
     })
   );
+}
+
+const ICONO_BUSCAR =
+  '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/></svg>';
+
+function fechaRegistro(valor) {
+  const span = document.createElement("span");
+  span.className = "fecha";
+  span.textContent = formatearFecha(valor);
+  return span;
 }
 
 function celda(label, ...hijos) {
@@ -126,6 +136,7 @@ function filaEmpleado(e) {
   avatar.textContent = iniciales(e.nombre);
   const datos = document.createElement("div");
   const nombre = document.createElement("div");
+  nombre.className = "persona__nombre";
   nombre.textContent = esYo ? `${e.nombre} (tú)` : e.nombre;
   const email = document.createElement("div");
   email.className = "persona__email";
@@ -150,7 +161,7 @@ function filaEmpleado(e) {
   acciones.className = "tabla__acciones";
   const btnEstado = document.createElement("button");
   btnEstado.type = "button";
-  btnEstado.className = `btn btn--sm ${e.activo ? "btn--light" : "btn--primary"}`;
+  btnEstado.className = `btn btn--sm ${e.activo ? "btn--light" : "btn--secondary"}`;
   btnEstado.textContent = e.activo ? "Desactivar" : "Activar";
   btnEstado.disabled = esYo;
   if (esYo) btnEstado.title = "No puedes desactivar tu propia cuenta";
@@ -161,7 +172,7 @@ function filaEmpleado(e) {
     celda("Empleado", persona),
     celda("Rol", selectRol),
     celda("Estado", estado),
-    celda("Registro", document.createTextNode(formatearFecha(e.creado))),
+    celda("Registro", fechaRegistro(e.creado)),
     celda("Acciones", acciones)
   );
   return tr;

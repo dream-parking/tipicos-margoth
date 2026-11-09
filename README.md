@@ -128,6 +128,12 @@ npm run serve        # http://localhost:5500
 
 `localhost` ya está autorizado en Firebase Auth por defecto.
 
+**Modo emulador (sin tocar los datos reales):** corre `npm run emuladores` en otra terminal y, en la consola del navegador en `localhost`, ejecuta `localStorage.emulador = "1"` y recarga la página. Para volver al proyecto real: `localStorage.removeItem("emulador")`. Para crear usuarios en el emulador: `FIREBASE_AUTH_EMULATOR_HOST=127.0.0.1:9099 FIRESTORE_EMULATOR_HOST=127.0.0.1:8080 GCLOUD_PROJECT=cafe-santa-cruz npm run seed:usuarios -- emulador.csv`.
+
+### Diseño del área privada
+
+El sistema visual del POS (tokens, tipografía y componentes) está en [DESIGN.md](DESIGN.md). Las páginas nuevas deben cargar `css/reset.css` y `css/app.css` (no `global.css`).
+
 ## Pruebas
 
 ```bash

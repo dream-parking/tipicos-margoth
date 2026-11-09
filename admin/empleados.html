@@ -7,9 +7,8 @@
   <link rel="icon" href="../img/logoRecortado.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@400&family=Inter+Tight:wght@500&family=Inter:wght@500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/reset.css">
-  <link rel="stylesheet" href="../css/global.css">
   <link rel="stylesheet" href="../css/app.css">
   <script type="module" src="../js/pages/empleados.js"></script>
 </head>
@@ -20,19 +19,23 @@
   <main class="app-main">
     <div class="app-title">
       <div>
+        <p class="eyebrow">Administración · Equipo</p>
         <h1>Empleados</h1>
         <p>Activa las cuentas nuevas y asigna los roles del equipo.</p>
       </div>
-      <button type="button" id="btn-recargar" class="btn btn--light btn--sm">Actualizar</button>
+      <button type="button" id="btn-recargar" class="btn btn--light btn--sm">
+        <svg class="btn__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7"/></svg>
+        Actualizar
+      </button>
     </div>
 
-    <section aria-label="Resumen" class="grid-cards" id="resumen" style="margin-bottom: var(--space-lg)"></section>
+    <section aria-label="Resumen del equipo" class="stats" id="resumen"></section>
 
-    <section class="card" aria-labelledby="titulo-lista">
+    <section class="panel-datos" aria-labelledby="titulo-lista">
       <h2 id="titulo-lista" class="sr-only">Lista de empleados</h2>
       <form class="toolbar" id="filtros" role="search" onsubmit="return false">
         <label class="sr-only" for="buscar">Buscar por nombre o correo</label>
-        <input class="input" type="search" id="buscar" name="texto" placeholder="Buscar por nombre o correo…">
+        <input class="input" type="search" id="buscar" name="texto" placeholder="Buscar por nombre o correo">
         <label class="sr-only" for="filtro-rol">Filtrar por rol</label>
         <select class="select" id="filtro-rol" name="rol">
           <option value="todos">Todos los roles</option>
@@ -43,14 +46,14 @@
         <select class="select" id="filtro-estado" name="estado">
           <option value="todos">Todos los estados</option>
           <option value="activo">Activos</option>
-          <option value="inactivo">Pendientes / inactivos</option>
+          <option value="inactivo">Pendientes</option>
         </select>
       </form>
-      <p class="field__hint" id="conteo" aria-live="polite"></p>
+      <p class="conteo" id="conteo" aria-live="polite"></p>
       <div id="lista" class="tabla-wrap"></div>
     </section>
   </main>
 
-  <footer class="app-footer">© 2026 Café Santa Cruz · Punto de venta</footer>
+  <footer class="app-footer"><span>© 2026 Café Santa Cruz</span><span>POS · v1.0</span></footer>
 </body>
 </html>

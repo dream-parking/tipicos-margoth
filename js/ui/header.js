@@ -36,7 +36,8 @@ export function renderHeader(perfil) {
   const marca = document.createElement("a");
   marca.className = "app-header__brand";
   marca.href = urlDe("panel.html");
-  marca.innerHTML = `<img src="${urlDe("img/logo.png")}" alt=""><span>Santa Cruz POS</span>`;
+  marca.setAttribute("aria-label", "Café Santa Cruz POS, ir al panel");
+  marca.innerHTML = `<img src="${urlDe("img/logoRecortado.png")}" alt=""><span>Santa Cruz<small>Punto de venta</small></span>`;
 
   const nav = document.createElement("nav");
   nav.setAttribute("aria-label", "Menú principal");
@@ -71,7 +72,7 @@ export function renderHeader(perfil) {
 
   const salir = document.createElement("button");
   salir.type = "button";
-  salir.className = "btn btn--sm";
+  salir.className = "btn btn--secondary btn--sm";
   salir.textContent = "Salir";
   salir.addEventListener("click", async () => {
     salir.disabled = true;
