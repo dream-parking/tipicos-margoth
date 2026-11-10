@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catálogo e inventario · Café Santa Cruz POS</title>
+  <link rel="icon" href="../img/logoRecortado.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@400&family=Inter+Tight:wght@500&family=Inter:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/app.css">
+  <script type="module" src="../js/pages/catalogo.js"></script>
+</head>
+<body data-auth="pendiente">
+  <header data-app-header></header>
+  <div class="auth-check" aria-hidden="true"><span class="spinner"></span></div>
+
+  <main class="app-main">
+    <div class="app-title">
+      <div>
+        <p class="eyebrow">Administración · Menú</p>
+        <h1>Catálogo e inventario</h1>
+        <p>Gestiona los productos, sus precios y el stock disponible.</p>
+      </div>
+      <div class="app-title__acciones">
+        <button type="button" id="btn-recargar" class="btn btn--light">
+          <svg class="btn__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7"/></svg>
+          Actualizar
+        </button>
+        <button type="button" id="btn-crear" class="btn btn--primary" aria-haspopup="dialog">
+          <svg class="btn__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+          Nuevo producto
+        </button>
+      </div>
+    </div>
+
+    <section aria-label="Resumen del inventario" class="stats" id="resumen"></section>
+
+    <section class="panel-datos" aria-labelledby="titulo-lista">
+      <h2 id="titulo-lista" class="sr-only">Lista de productos</h2>
+      <form class="toolbar" id="filtros" role="search" onsubmit="return false">
+        <label class="sr-only" for="buscar">Buscar por nombre o descripción</label>
+        <input class="input" type="search" id="buscar" name="texto" placeholder="Buscar por nombre o descripción">
+        <label class="sr-only" for="filtro-categoria">Filtrar por categoría</label>
+        <select class="select" id="filtro-categoria" name="categoria"></select>
+        <label class="sr-only" for="orden">Ordenar por</label>
+        <select class="select" id="orden" name="orden"></select>
+        <label class="check check--toolbar" for="solo-bajo">
+          <input type="checkbox" id="solo-bajo" name="soloBajoStock">
+          <span>Solo bajo stock</span>
+        </label>
+      </form>
+      <p class="conteo" id="conteo" aria-live="polite"></p>
+      <ul class="conteo-categorias" id="categorias" aria-label="Productos por categoría"></ul>
+      <div id="lista" class="tabla-wrap"></div>
+    </section>
+  </main>
+
+  <!-- Crear / editar producto -->
+  <dialog class="modal modal--form" id="dlg-producto" aria-labelledby="dlg-producto-titulo">
+    <form id="form-producto" novalidate>
+      <p class="eyebrow" id="dlg-producto-eyebrow">Nuevo producto</p>
+      <h2 class="modal__titulo" id="dlg-producto-titulo">Crear producto</h2>
+
+      <div class="field">
+        <label for="prod-nombre">Nombre</label>
+        <input class="input" type="text" id="prod-nombre" name="nombre" autocomplete="off" maxlength="80" required>
+      </div>
+      <div class="field">
+        <label for="prod-descripcion">Descripción <span class="field__opcional">(opcional)</span></label>
+        <input class="input" type="text" id="prod-descripcion" name="descripcion" autocomplete="off" maxlength="200">
+      </div>
+      <div class="campos-fila campos-fila--iguales">
+        <div class="field">
+          <label for="prod-categoria">Categoría</label>
+          <select class="select" id="prod-categoria" name="categoria" required></select>
+        </div>
+        <div class="field">
+          <label for="prod-etiqueta">Etiqueta <span class="field__opcional">(opcional)</span></label>
+          <input class="input" type="text" id="prod-etiqueta" name="etiqueta" autocomplete="off" maxlength="30" placeholder="Ej. Recomendado">
+        </div>
+      </div>
+      <div class="campos-fila campos-fila--tres">
+        <div class="field">
+          <label for="prod-precio">Precio (US$)</label>
+          <input class="input" type="number" id="prod-precio" name="precio" inputmode="decimal" step="0.01" min="0.01" required>
+        </div>
+        <div class="field">
+          <label for="prod-stock">Stock</label>
+          <input class="input" type="number" id="prod-stock" name="stock" inputmode="numeric" step="1" min="0" required>
+        </div>
+        <div class="field">
+          <label for="prod-stock-minimo">Stock mínimo</label>
+          <input class="input" type="number" id="prod-stock-minimo" name="stockMinimo" inputmode="numeric" step="1" min="0" required>
+        </div>
+      </div>
+      <label class="check" for="prod-disponible">
+        <input type="checkbox" id="prod-disponible" name="disponible" checked>
+        <span>Disponible en el menú</span>
+      </label>
+
+      <div class="modal__acciones">
+        <button type="button" class="btn btn--light" id="btn-cancelar-producto">Cancelar</button>
+        <button type="submit" class="btn btn--primary" id="btn-guardar-producto">Guardar</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Entrada de mercadería -->
+  <dialog class="modal modal--form" id="dlg-entrada" aria-labelledby="dlg-entrada-titulo">
+    <form id="form-entrada" novalidate>
+      <p class="eyebrow">Inventario</p>
+      <h2 class="modal__titulo" id="dlg-entrada-titulo">Entrada de mercadería</h2>
+      <p class="modal__mensaje" id="entrada-detalle"></p>
+      <div class="field">
+        <label for="entrada-cantidad">Cantidad que entra</label>
+        <input class="input" type="number" id="entrada-cantidad" name="cantidad" inputmode="numeric" step="1" min="1" required>
+      </div>
+      <div class="modal__acciones">
+        <button type="button" class="btn btn--light" id="btn-cancelar-entrada">Cancelar</button>
+        <button type="submit" class="btn btn--primary">Sumar al stock</button>
+      </div>
+    </form>
+  </dialog>
+
+  <footer class="app-footer"><span>© 2026 Café Santa Cruz</span><span>POS · v1.0</span></footer>
+</body>
+</html>

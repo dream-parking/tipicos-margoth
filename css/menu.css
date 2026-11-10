@@ -100,3 +100,70 @@
   font-size: 0.875rem;
   color: #5A6B7A;
 }
+
+/* ───────── Menú dinámico: precio y estados de carga / vacío / error ───────── */
+.menu-item__precio {
+  display: block;
+  margin-top: 12px;
+  font-weight: 700;
+  font-size: 1.125rem;
+  color: #0D2240;
+}
+
+.menu-item__agotado {
+  margin-top: 8px;
+  font-weight: 600;
+  color: #8B5A2B;
+}
+
+.estado {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 48px 16px;
+  text-align: center;
+  color: #5A6B7A;
+}
+
+.estado__icono {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #F8F9FA;
+  border: 1px solid rgba(13, 34, 64, 0.12);
+}
+
+.estado__titulo {
+  font-weight: 700;
+  color: #0D2240;
+  margin-bottom: 0;
+}
+
+.estado__mensaje {
+  margin-bottom: 0;
+}
+
+.estado--error .estado__icono {
+  color: #B42318;
+  background: #FEF3F2;
+}
+
+.spinner {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 3px solid rgba(13, 34, 64, 0.15);
+  border-top-color: #00A3E0;
+  animation: menu-giro 0.8s linear infinite;
+}
+
+@keyframes menu-giro {
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spinner { animation-duration: 2.4s; }
+}

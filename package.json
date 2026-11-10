@@ -10,7 +10,8 @@
     "serve": "npx --yes http-server -c-1 -p 5500 .",
     "emuladores": "firebase emulators:start --only auth,firestore --project cafe-santa-cruz",
     "deploy:rules": "firebase deploy --only firestore:rules --project cafe-santa-cruz",
-    "seed:usuarios": "node scripts/crear-usuarios-prueba.mjs"
+    "seed:usuarios": "node scripts/crear-usuarios-prueba.mjs",
+    "seed:productos": "node scripts/migrar-productos.mjs"
   },
   "devDependencies": {
     "@firebase/rules-unit-testing": "^4.0.1",
