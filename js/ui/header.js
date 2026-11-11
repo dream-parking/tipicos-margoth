@@ -11,6 +11,8 @@ import { toastError } from "./toast.js";
  */
 export const NAVEGACION = [
   { ruta: "panel.html", texto: "Panel", roles: ["admin", "cajero"] },
+  { ruta: "admin/catalogo.html", texto: "Catálogo", roles: ["admin"] },
+  { ruta: "admin/reportes.html", texto: "Reportes", roles: ["admin"] },
   { ruta: "admin/empleados.html", texto: "Empleados", roles: ["admin"] },
   { ruta: "index.html", texto: "Sitio público", roles: ["admin", "cajero"] },
 ];

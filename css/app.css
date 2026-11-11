@@ -535,3 +535,54 @@ a.modulo:focus-visible { border-radius: var(--r-card); }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
 }
+
+/* ───────── Catálogo e inventario ───────── */
+.badge--bajo { background: var(--danger-bg); color: var(--danger); box-shadow: inset 0 0 0 1px #fda29b; }
+.badge--bajo::before { background: var(--danger); }
+.fila--bajo { background: #fffbfa; }
+.stock { display: flex; align-items: center; flex-wrap: wrap; gap: var(--s-8); }
+.stock__minimo { font: 400 11px/1 var(--font-mono); color: var(--slate); }
+.producto__etiqueta {
+  display: inline-block; margin-left: 4px; padding: 2px 8px; border-radius: var(--r-tag);
+  background: var(--notice); color: var(--accent-dark); font: 400 11px/1.4 var(--font-mono);
+}
+.field__opcional { font-weight: 400; color: var(--slate); }
+.campos-fila--iguales { grid-template-columns: 1fr 1fr; }
+.campos-fila--tres { grid-template-columns: repeat(3, 1fr); }
+.check--toolbar { margin: 0 var(--s-8); white-space: nowrap; }
+.conteo-categorias {
+  display: flex; flex-wrap: wrap; gap: var(--s-8) var(--s-16); padding: 12px var(--s-16);
+  border-bottom: 1px solid var(--steel); font-size: 13px; color: var(--charcoal);
+}
+.conteo-categorias strong { font: 400 13px var(--font-mono); color: var(--ink); }
+.tabla .tabla__acciones { flex-wrap: wrap; }
+
+@media (max-width: 720px) {
+  .campos-fila--iguales, .campos-fila--tres { grid-template-columns: 1fr; }
+  .tabla--responsive td[data-label="Producto"] { grid-column: 1 / -1; }
+  .tabla--responsive td[data-label="Categoría"] { grid-column: 1 / -1; color: var(--slate); font-size: 13px; }
+}
+
+/* ───────── Reportes ───────── */
+.field--inline { flex-direction: row; align-items: center; margin: 0; }
+.field--inline span { font: 400 12px var(--font-mono); color: var(--slate); text-transform: uppercase; letter-spacing: 0.04em; }
+.field--inline .input { width: auto; }
+.atajos { display: flex; gap: var(--s-8); margin-left: auto; }
+#reporte { margin-top: var(--s-40); }
+.reporte-rejilla { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--s-24); }
+.reporte-card { background: var(--paper); border-radius: var(--r-card); box-shadow: var(--elev-card); padding: var(--s-24); }
+.reporte-card:first-child { grid-column: 1 / -1; }
+.reporte-card__titulo { font-size: 16px; margin-bottom: var(--s-16); }
+.reporte-card__vacio { color: var(--slate); font-size: 14px; }
+.barras { display: flex; flex-direction: column; gap: 10px; }
+.barra-fila { display: grid; grid-template-columns: minmax(90px, 200px) 1fr auto; align-items: center; gap: var(--s-16); font-size: 14px; }
+.barra-fila__nombre { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.barra-fila__pista { height: 10px; background: var(--cloud); border-radius: 2px; overflow: hidden; }
+.barra-fila__barra { display: block; height: 100%; background: var(--accent); border-radius: 2px; }
+.barra-fila__valor { font: 400 13px var(--font-mono); font-feature-settings: "tnum"; }
+@media (max-width: 720px) {
+  .reporte-rejilla { grid-template-columns: 1fr; }
+  .atajos { margin-left: 0; }
+  .barra-fila { grid-template-columns: 1fr auto; }
+  .barra-fila__pista { grid-column: 1 / -1; order: 3; }
+}

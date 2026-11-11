@@ -167,3 +167,5 @@ npm run test:all     # ambas
 ## Equipo
 
 Desarrollo Web I · ESEN · 2026
+- **Productos iniciales:** `npm run seed:productos` carga el catálogo del menú en Firestore (o usa el botón «Cargar datos iniciales» en `admin/catalogo.html`). Es seguro repetirlo.
+- **Ventas de ejemplo (solo para ver los reportes):** `npm run seed:ventas-demo` crea ventas marcadas `demo: true`; `node scripts/generar-ventas-demo.mjs --borrar` las elimina.
