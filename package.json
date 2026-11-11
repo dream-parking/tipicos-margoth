@@ -11,7 +11,8 @@
     "emuladores": "firebase emulators:start --only auth,firestore --project cafe-santa-cruz",
     "deploy:rules": "firebase deploy --only firestore:rules --project cafe-santa-cruz",
     "seed:usuarios": "node scripts/crear-usuarios-prueba.mjs",
-    "seed:productos": "node scripts/migrar-productos.mjs"
+    "seed:productos": "node scripts/migrar-productos.mjs",
+    "seed:ventas-demo": "node scripts/generar-ventas-demo.mjs"
   },
   "devDependencies": {
     "@firebase/rules-unit-testing": "^4.0.1",

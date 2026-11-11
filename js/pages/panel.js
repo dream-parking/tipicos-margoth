@@ -24,7 +24,7 @@ const ACCESOS = [
   { id: "pos", titulo: "Punto de venta", texto: "Cobra órdenes y emite tickets.", ruta: null, roles: ["admin", "cajero"] },
   { id: "caja", titulo: "Cierre de caja", texto: "Cuadra el efectivo del turno.", ruta: null, roles: ["admin", "cajero"] },
   { id: "catalogo", titulo: "Catálogo e inventario", texto: "Productos, precios y stock.", ruta: "admin/catalogo.html", roles: ["admin"] },
-  { id: "reportes", titulo: "Reportes", texto: "Ventas, productos top e indicadores.", ruta: null, roles: ["admin"] },
+  { id: "reportes", titulo: "Reportes", texto: "Ventas, productos top e indicadores.", ruta: "admin/reportes.html", roles: ["admin"] },
   { id: "empleados", titulo: "Empleados", texto: "Activa cuentas y asigna roles.", ruta: "admin/empleados.html", roles: ["admin"] },
 ];
 
