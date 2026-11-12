@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Historial de ventas · Café Santa Cruz POS</title>
+  <link rel="icon" href="img/logoRecortado.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@400&family=Inter+Tight:wght@500&family=Inter:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/app.css">
+  <script type="module" src="js/pages/historial.js"></script>
+</head>
+
+<body data-auth="pendiente">
+  <header data-app-header></header>
+  <div class="auth-check" aria-hidden="true"><span class="spinner"></span></div>
+
+  <main class="app-main">
+    <div class="app-title">
+      <div>
+        <p class="eyebrow">Caja · Ventas</p>
+        <h1>Historial de ventas</h1>
+        <p id="subtitulo"></p>
+      </div>
+    </div>
+
+    <section class="panel-datos" aria-label="Ventas registradas">
+      <form class="toolbar" id="filtros" onsubmit="return false" hidden>
+        <label class="field field--inline" for="desde"><span>Desde</span>
+          <input class="input" type="date" id="desde" name="desde" required>
+        </label>
+        <label class="field field--inline" for="hasta"><span>Hasta</span>
+          <input class="input" type="date" id="hasta" name="hasta" required>
+        </label>
+        <button type="submit" class="btn btn--primary" id="btn-consultar">Consultar</button>
+        <div class="atajos" role="group" aria-label="Rangos rápidos">
+          <button type="button" class="btn btn--light btn--sm" data-dias="1">Hoy</button>
+          <button type="button" class="btn btn--light btn--sm" data-dias="7">7 días</button>
+          <button type="button" class="btn btn--light btn--sm" data-dias="30">30 días</button>
+        </div>
+        <div class="toolbar__filtros">
+          <label class="sr-only" for="cajero">Cajero</label>
+          <select class="select" id="cajero" name="cajero">
+            <option value="todos">Todos los cajeros</option>
+          </select>
+          <label class="sr-only" for="metodo">Método de pago</label>
+          <select class="select" id="metodo" name="metodo">
+            <option value="todos">Todos los métodos</option>
+            <option value="efectivo">Efectivo</option>
+            <option value="tarjeta">Tarjeta</option>
+          </select>
+          <label class="sr-only" for="estado">Estado</label>
+          <select class="select" id="estado" name="estado">
+            <option value="todos">Todos los estados</option>
+            <option value="pagada">Pagadas</option>
+            <option value="anulada">Anuladas</option>
+          </select>
+        </div>
+      </form>
+      <p class="conteo" id="conteo" aria-live="polite"></p>
+      <div id="lista" class="tabla-wrap"></div>
+    </section>
+  </main>
+
+  <dialog class="modal modal--form" id="dlg-anular" aria-labelledby="dlg-anular-titulo">
+    <form id="form-anular" novalidate>
+      <p class="eyebrow">Ventas</p>
+      <h2 class="modal__titulo" id="dlg-anular-titulo">Anular venta</h2>
+      <p class="modal__mensaje" id="anular-detalle"></p>
+      <div class="field">
+        <label for="anular-motivo">Motivo de la anulación</label>
+        <input class="input" type="text" id="anular-motivo" name="motivo" maxlength="120" autocomplete="off" required>
+      </div>
+      <div class="modal__acciones">
+        <button type="button" class="btn btn--light" id="btn-cancelar-anular">Cancelar</button>
+        <button type="submit" class="btn btn--danger" id="btn-confirmar-anular">Anular venta</button>
+      </div>
+    </form>
+  </dialog>
+</body>
+</html>
