@@ -7,10 +7,13 @@ import { toastError } from "./toast.js";
 
 /**
  * Enlaces del menú interno. `roles` indica quién ve cada enlace.
- * Secciones 2 y 3: agregar aquí "admin/catalogo.html", "pos.html", etc.
+ * Las páginas de caja (pos, historial y cierre) las ven admin y cajero.
  */
 export const NAVEGACION = [
   { ruta: "panel.html", texto: "Panel", roles: ["admin", "cajero"] },
+  { ruta: "pos.html", texto: "Vender", roles: ["admin", "cajero"] },
+  { ruta: "historial.html", texto: "Ventas", roles: ["admin", "cajero"] },
+  { ruta: "caja.html", texto: "Caja", roles: ["admin", "cajero"] },
   { ruta: "admin/catalogo.html", texto: "Catálogo", roles: ["admin"] },
   { ruta: "admin/reportes.html", texto: "Reportes", roles: ["admin"] },
   { ruta: "admin/empleados.html", texto: "Empleados", roles: ["admin"] },
