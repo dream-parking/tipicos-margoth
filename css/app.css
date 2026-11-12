@@ -149,7 +149,7 @@ img { border-radius: 0; }
 }
 .app-header__inner {
   display: flex; align-items: center; gap: var(--s-24);
-  max-width: var(--container); margin-inline: auto;
+  max-width: 1280px; margin-inline: auto;
   padding: 12px var(--s-24);
 }
 .app-header__brand { display: flex; align-items: center; gap: var(--s-12); flex: none; }
@@ -165,8 +165,8 @@ img { border-radius: 0; }
 
 .app-nav { display: flex; gap: var(--s-4); list-style: none; flex-wrap: wrap; }
 .app-nav a {
-  display: flex; align-items: center; gap: var(--s-8);
-  padding: 8px 10px; border-radius: var(--r-link);
+  display: flex; align-items: center; gap: 6px;
+  padding: 8px 7px; border-radius: var(--r-link);
   font-size: 14px; line-height: 1; color: var(--slate);
 }
 .app-nav a::before {
@@ -185,7 +185,7 @@ img { border-radius: 0; }
   font: 400 12px/1 var(--font-mono);
 }
 .app-user__info { display: flex; flex-direction: column; gap: 3px; line-height: 1; }
-.app-user__nombre { font-size: 13px; }
+.app-user__nombre { font-size: 13px; max-width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .app-user__rol { font: 400 11px/1 var(--font-mono); color: var(--slate); text-transform: uppercase; letter-spacing: 0.04em; }
 
 /* Mientras se verifica la sesión no se muestra el contenido protegido */
@@ -501,6 +501,15 @@ a.modulo:focus-visible { border-radius: var(--r-card); }
   .stat:nth-child(n + 3) { border-top: 1px solid var(--steel); }
 }
 
+/* Cuando el menú no cabe en una fila (el admin tiene 8 enlaces), el header pasa a
+   dos filas: marca y usuario arriba, menú abajo con desplazamiento horizontal. */
+@media (max-width: 1280px) {
+  .app-header__inner { flex-wrap: wrap; gap: var(--s-12) var(--s-24); }
+  .app-header__inner > nav { order: 3; width: 100%; }
+  .app-nav { overflow-x: auto; flex-wrap: nowrap; margin-inline: -7px; scrollbar-width: none; }
+  .app-nav a { white-space: nowrap; }
+}
+
 @media (max-width: 720px) {
   .app-header__inner { padding: 10px var(--s-16); gap: var(--s-12); flex-wrap: wrap; }
   .app-header__brand small, .app-user__info { display: none; }
@@ -586,3 +595,68 @@ a.modulo:focus-visible { border-radius: var(--r-card); }
   .barra-fila { grid-template-columns: 1fr auto; }
   .barra-fila__pista { grid-column: 1 / -1; order: 3; }
 }
+
+
+
+/* ───────── Punto de venta ───────── */
+.pos { display: grid; grid-template-columns: 1fr 360px; gap: var(--s-24); align-items: start; }
+.pos__busqueda { margin-bottom: var(--s-16); }
+.pos__tabs { display: flex; gap: var(--s-8); flex-wrap: wrap; margin-bottom: var(--s-16); }
+.pos__tab {
+  padding: 8px 14px; border: 0; border-radius: var(--r-btn); cursor: pointer;
+  font: 500 13px/1 var(--font-ui); color: var(--ink);
+  background: var(--paper); box-shadow: inset 0 0 0 1px var(--steel);
+}
+.pos__tab:hover { background: var(--cloud); }
+.pos__tab[aria-pressed="true"] { background: var(--graphite); color: var(--paper); box-shadow: var(--inset-edge); }
+
+.pos__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: var(--s-12); }
+.pos-producto {
+  display: flex; flex-direction: column; gap: var(--s-8); text-align: left;
+  padding: var(--s-16); border: 0; border-radius: var(--r-btn); cursor: pointer;
+  font: inherit; color: inherit; background: var(--paper); box-shadow: var(--elev-card);
+  transition: transform 0.15s ease;
+}
+.pos-producto:hover:not(:disabled) { transform: translateY(-2px); }
+.pos-producto:disabled { opacity: 0.55; cursor: not-allowed; background: var(--cloud); box-shadow: inset 0 0 0 1px var(--steel); }
+.pos-producto__nombre { font: 500 16px/1.2 var(--font-display); letter-spacing: -0.02em; }
+.pos-producto__precio { font: 400 14px var(--font-mono); }
+.pos-producto__stock { font: 400 11px var(--font-mono); color: var(--slate); text-transform: uppercase; }
+.pos-producto__estado { font: 400 11px var(--font-mono); color: var(--accent-dark); text-transform: uppercase; }
+
+.pos__ticket { position: sticky; top: var(--s-24); }
+.pos__ticket h2 { font-size: 24px; margin-bottom: var(--s-16); }
+.pos__lineas { list-style: none; display: grid; gap: var(--s-8); margin-bottom: var(--s-16); }
+.pos__vacio { color: var(--slate); padding: var(--s-16) 0; }
+.pos-linea { display: grid; grid-template-columns: 1fr 64px auto auto; gap: var(--s-8); align-items: center; }
+.pos-linea__nombre { font-weight: 600; }
+.pos-linea__cantidad { height: 36px; padding: 0 8px; text-align: center; }
+.pos-linea__importe { font: 400 13px var(--font-mono); }
+
+.pos__totales { border-top: 1px solid var(--steel); padding-top: var(--s-12); margin-bottom: var(--s-16); display: grid; gap: var(--s-8); }
+.pos__totales div { display: flex; justify-content: space-between; }
+.pos__totales dd { font: 400 14px var(--font-mono); }
+.pos__total { font: 500 20px var(--font-display); }
+.pos__total dd { font: 500 20px var(--font-mono); }
+
+@media (max-width: 900px) {
+  .pos { grid-template-columns: 1fr; }
+  .pos__ticket { position: static; }
+}
+
+/* ───────── Historial de ventas ───────── */
+.venta--anulada td { color: var(--slate); }
+.venta--anulada .venta__total { text-decoration: line-through; }
+.venta__detalle { font: 400 12px/1.4 var(--font-mono); color: var(--slate); margin-top: var(--s-4); }
+.venta__motivo { color: var(--accent-dark); }
+
+/* ───────── Cierre de caja ───────── */
+.cierre { max-width: 520px; margin-bottom: var(--s-24); }
+.cierre h2 { font-size: 24px; margin-bottom: var(--s-16); }
+.cierres__titulo { font-size: 20px; padding: var(--s-16); border-bottom: 1px solid var(--steel); }
+.dif--cuadra { color: var(--green); }
+.dif--sobrante { color: var(--accent-dark); }
+.dif--faltante { color: var(--danger); }
+
+.toolbar__filtros { display: flex; flex: 1 1 100%; gap: var(--s-8); flex-wrap: wrap; padding-top: var(--s-8); border-top: 1px solid var(--line-soft); }
+.toolbar__filtros .select { flex: 1 1 180px; width: auto; }

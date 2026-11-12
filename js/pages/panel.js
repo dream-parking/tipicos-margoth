@@ -7,6 +7,7 @@ import { resumenEmpleados } from "../utils/empleados.js";
 // Íconos de trazo (24×24) para cada módulo.
 const ICONOS = {
   pos: '<path d="M4 7h16v12H4z"/><path d="M8 7V4h8v3M8 12h8M8 15h5"/>',
+  ventas: '<path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6"/>',
   caja: '<rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M7 15h3"/>',
   catalogo: '<path d="M4 5h7v7H4zM13 5h7v7h-7zM4 14h7v5H4zM13 14h7v5h-7z"/>',
   reportes: '<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',
@@ -18,11 +19,11 @@ const svg = (trazo, clase = "") =>
 
 /**
  * Módulos del panel. `ruta: null` = aún no disponible (lo implementa otra sección).
- * Secciones 2 y 3: cambiar `ruta` cuando su página exista.
  */
 const ACCESOS = [
-  { id: "pos", titulo: "Punto de venta", texto: "Cobra órdenes y emite tickets.", ruta: null, roles: ["admin", "cajero"] },
-  { id: "caja", titulo: "Cierre de caja", texto: "Cuadra el efectivo del turno.", ruta: null, roles: ["admin", "cajero"] },
+  { id: "pos", titulo: "Punto de venta", texto: "Cobra órdenes y emite tickets.", ruta: "pos.html", roles: ["admin", "cajero"] },
+  { id: "ventas", titulo: "Historial de ventas", texto: "Consulta las ventas; el admin puede anularlas.", ruta: "historial.html", roles: ["admin", "cajero"] },
+  { id: "caja", titulo: "Cierre de caja", texto: "Cuadra el efectivo del turno.", ruta: "caja.html", roles: ["admin", "cajero"] },
   { id: "catalogo", titulo: "Catálogo e inventario", texto: "Productos, precios y stock.", ruta: "admin/catalogo.html", roles: ["admin"] },
   { id: "reportes", titulo: "Reportes", texto: "Ventas, productos top e indicadores.", ruta: "admin/reportes.html", roles: ["admin"] },
   { id: "empleados", titulo: "Empleados", texto: "Activa cuentas y asigna roles.", ruta: "admin/empleados.html", roles: ["admin"] },

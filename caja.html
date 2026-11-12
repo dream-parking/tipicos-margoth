@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cierre de caja · Café Santa Cruz POS</title>
+  <link rel="icon" href="img/logoRecortado.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@400&family=Inter+Tight:wght@500&family=Inter:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/app.css">
+  <script type="module" src="js/pages/caja.js"></script>
+</head>
+
+<body data-auth="pendiente">
+  <header data-app-header></header>
+  <div class="auth-check" aria-hidden="true"><span class="spinner"></span></div>
+
+  <main class="app-main">
+    <div class="app-title">
+      <div>
+        <p class="eyebrow">Caja · Turno</p>
+        <h1>Cierre de caja</h1>
+        <p id="subtitulo"></p>
+      </div>
+    </div>
+
+    <section class="stats" id="resumen" aria-label="Resumen del día"></section>
+
+    <section class="card cierre" aria-labelledby="titulo-cierre">
+      <h2 id="titulo-cierre">Efectivo contado</h2>
+      <div id="estado-cierre" hidden></div>
+      <form id="form-cierre" novalidate>
+        <div class="field">
+          <label for="contado">Efectivo contado en caja (US$)</label>
+          <input class="input" type="number" id="contado" name="contado" min="0" step="0.01" inputmode="decimal" required>
+          <p class="field__hint" id="vista-diferencia">Diferencia: —</p>
+        </div>
+        <p class="field__error" id="error-cierre" hidden></p>
+        <button type="submit" class="btn btn--primary btn--lg" id="btn-cerrar">Cerrar caja</button>
+      </form>
+    </section>
+
+    <section class="panel-datos cierres" aria-labelledby="titulo-historial">
+      <h2 id="titulo-historial" class="cierres__titulo">Cierres anteriores</h2>
+      <div id="historial" class="tabla-wrap"></div>
+    </section>
+  </main>
+</body>
+</html>
