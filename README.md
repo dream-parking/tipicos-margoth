@@ -38,7 +38,8 @@ El catálogo alimenta al POS, cada venta descuenta inventario y las ventas alime
 ├── index.html, menu.html, gallery.html, contacto.html   ← sitio público (DP I)
 ├── login.html, registro.html                            ← acceso de empleados
 ├── panel.html                                           ← inicio interno según el rol
-├── admin/empleados.html                                 ← gestión de empleados (admin)
+├── pos.html, historial.html, caja.html                  ← punto de venta, historial de ventas y cierre de caja
+├── admin/                                               ← catalogo, empleados y reportes (solo admin)
 ├── css/
 │   ├── reset.css, global.css                            ← tokens y estilos base
 │   └── app.css                                          ← componentes del sistema interno
@@ -51,7 +52,7 @@ El catálogo alimenta al POS, cada venta descuenta inventario y las ventas alime
 │   └── pages/                 ← comportamiento de cada página
 ├── firestore.rules            ← autorización por rol
 ├── firebase.json, .firebaserc ← emuladores y deploy de reglas
-├── scripts/                   ← script de usuarios de prueba
+├── scripts/                   ← usuarios de prueba, productos iniciales y ventas de ejemplo
 └── tests/
     ├── unit/                  ← validaciones y lógica de negocio
     └── rules/                 ← reglas de Firestore contra el emulador
@@ -65,13 +66,32 @@ La separación es: **config** (plataforma) → **services** (datos en Firestore)
 |---|---|---|
 | `usuarios/{uid}` | `nombre, email, rol, activo, creado` | El propio usuario al registrarse (solo como cajero inactivo); el admin cambia `rol` y `activo`. |
 | `productos/{id}` | `nombre, descripcion, precio, categoria, imagen, disponible, controlaStock, stock, stockMinimo` | El admin. El cajero solo puede **bajar** `stock` al vender. |
-| `ventas/{id}` | `cajeroId, cajeroNombre, items[], subtotal, descuento, total, metodoPago, efectivoRecibido, cambio, estado, motivoAnulacion, creado` | Cualquier empleado activo, a su nombre y con `estado: "pagada"`. Solo el admin anula. Nadie borra. |
-| `cierres/{uid_fecha}` | `cajeroId, fecha (YYYY-MM-DD), ventasCount, totalEfectivo, totalTarjeta, efectivoContado, diferencia, creado` | El cajero, uno por día: el ID `uid_fecha` impide duplicados. |
+| `ventas/{id}` | `cajeroId, cajeroNombre, items[], subtotal, descuento, descuentoPorcentaje, motivoDescuento, total, metodoPago, efectivoRecibido, cambio, estado, motivoAnulacion, anuladoPor, anuladoEn, creado` | Cualquier empleado activo, a su nombre y con `estado: "pagada"`. Solo el admin anula. Nadie borra. |
+| `cierres/{uid_fecha}` | `cajeroId, cajeroNombre, fecha (YYYY-MM-DD), ventasCount, totalEfectivo, totalTarjeta, efectivoContado, diferencia, creado` | El cajero, uno por día: el ID `uid_fecha` impide duplicados. |
 
-> **Para las Secciones 2 y 3:**
-> - Un cajero que consulte `ventas` o `cierres` **debe filtrar** con `where("cajeroId", "==", uid)`, o Firestore rechaza la consulta completa.
+Cada línea de `items[]` guarda `productoId, nombre, categoria, precio, cantidad`, para que una venta conserve el precio y el nombre del momento aunque el producto cambie después.
+
+> **Reglas que respeta el código:**
+> - Un cajero que consulte `ventas` o `cierres` **debe filtrar** con `where("cajeroId", "==", uid)`, o Firestore rechaza la consulta completa. Por eso el historial y el cierre piden las ventas del cajero y recortan "hoy" en JavaScript: así no hace falta un índice compuesto.
 > - Los productos deben incluir `nombre`, `precio > 0`, `categoria` y `disponible`.
-> - La venta y el descuento de stock deben ir en un `runTransaction`.
+> - La venta y el descuento de stock van en un `runTransaction` (`registrarVenta`). La anulación y la devolución de stock también (`anularVenta`).
+> - Al vender, el cajero solo escribe el campo `stock` del producto (las reglas no le dejan tocar nada más).
+
+## Punto de venta y cierre de caja
+
+| Proceso | Página | Lógica |
+|---|---|---|
+| Venta en caja | `pos.html` | `js/utils/pos.js` (ticket, descuento, cobro, stock) y `registrarVenta` en `js/services/ventas.js` |
+| Historial y anulación | `historial.html` | `filtrarVentas` en `js/utils/pos.js` y `anularVenta` en `js/services/ventas.js` |
+| Cierre de caja | `caja.html` | `js/utils/caja.js` y `js/services/cierres.js` |
+
+**Venta en caja.** La cuadrícula de productos sale de Firestore, con pestañas por categoría y búsqueda rápida. Los productos agotados o no disponibles se muestran deshabilitados. El ticket permite agregar, quitar y cambiar cantidades, sin pasar del stock. El subtotal, el descuento (máximo 20% y con motivo) y el total se calculan en JavaScript. Con efectivo, el monto recibido debe ser igual o mayor al total y el cambio se calcula solo; con tarjeta no se pide monto.
+
+**Guardar la venta (`runTransaction`).** Al cobrar, la transacción relee el stock actual de cada producto, valida, descuenta el stock y crea la venta en una sola operación. Si dos cajas venden el último producto a la vez, solo una lo logra: la otra recibe el aviso de que ya no hay stock y conserva su ticket para ajustarlo.
+
+**Historial y anulación.** El cajero ve sus ventas del día. El admin ve todas, en un rango de fechas, y las filtra por cajero, método de pago y estado. El admin puede anular una venta con un motivo de al menos 3 caracteres: la venta queda como `anulada` y el stock se devuelve en la misma transacción. Las ventas nunca se borran.
+
+**Cierre de caja.** El sistema suma las ventas pagadas del día del cajero (las anuladas no cuentan) y calcula lo esperado en efectivo y en tarjeta. El cajero ingresa el efectivo contado y se guarda la diferencia, con una alerta si es distinta de 0 (sobrante o faltante). Solo se permite un cierre por cajero y por día: la pantalla oculta el formulario y las reglas de Firestore rechazan un segundo cierre.
 
 ## Módulo de UI compartido (`js/ui/`)
 
@@ -117,6 +137,10 @@ Para agregar la página al menú, añade una entrada a `NAVEGACION` en `js/ui/he
 3. **Como cajero:** comprueba que no aparece *Empleados* y que al abrir `/admin/empleados.html` directamente te redirige al panel.
 4. **Como el usuario pendiente:** el login avisa "pendiente de activación" y no da acceso.
 5. **Registro:** en */registro.html* crea una cuenta. Queda pendiente hasta que un admin la active.
+6. **Vender (`/pos.html`):** agrega productos, prueba el descuento (con más de 20% o sin motivo no deja cobrar) y cobra en efectivo con un monto menor al total (no deja) y luego uno mayor (muestra el cambio). Cobra otra venta con tarjeta y revisa en *Catálogo* que el stock bajó. Un producto con stock 0 aparece deshabilitado.
+7. **Venta simultánea:** con un producto de stock 1, agrégalo en dos pestañas y cobra en ambas casi al mismo tiempo. Solo una venta se guarda; la otra muestra que ya no queda stock.
+8. **Historial (`/historial.html`):** como **cajero** ves solo tus ventas de hoy y no aparece *Anular*. Como **admin** ves todas, usas los filtros y anulas una venta con motivo; después comprueba en *Catálogo* que el stock subió.
+9. **Cierre (`/caja.html`):** compara el efectivo y la tarjeta esperados con tus ventas del día, ingresa el efectivo contado y cierra. Aparece la diferencia con su alerta; al recargar ya no se puede cerrar otra vez el mismo día.
 
 ### Correr en local
 
@@ -143,7 +167,7 @@ npm run test:rules   # reglas de Firestore en el emulador (necesita Java 11+)
 npm run test:all     # ambas
 ```
 
-- **`tests/unit/`** (37 pruebas): validación de formularios, filtrado, orden e indicadores de empleados, regla de "al menos un admin", traducción de errores y formato.
+- **`tests/unit/`** (155 pruebas): validación de formularios, filtrado, orden e indicadores de empleados, regla de "al menos un admin", traducción de errores y formato, catálogo y reportes, las reglas del punto de venta (`pos.test.js`: ticket, descuento, cobro, stock, filtros del historial y devolución de stock), el cierre de caja (`caja.test.js`) y los datos de ejemplo (`datos-demo.test.js`).
 - **`tests/rules/`** (50 pruebas): casos permitidos y denegados por colección y rol. Por ejemplo, un cajero que intenta hacerse admin, un cajero inactivo que intenta vender, ventas a nombre de otro, subir stock, borrar ventas y un segundo cierre el mismo día.
 
 ## Configuración y despliegue
@@ -168,4 +192,4 @@ npm run test:all     # ambas
 
 Desarrollo Web I · ESEN · 2026
 - **Productos iniciales:** `npm run seed:productos` carga el catálogo del menú en Firestore (o usa el botón «Cargar datos iniciales» en `admin/catalogo.html`). Es seguro repetirlo.
-- **Ventas de ejemplo (solo para ver los reportes):** `npm run seed:ventas-demo` crea ventas marcadas `demo: true`; `node scripts/generar-ventas-demo.mjs --borrar` las elimina.
+- **Ventas y cierres de ejemplo:** `npm run seed:ventas-demo` carga unas 30 ventas de 12 días distintos (algunas con descuento y varias anuladas) y 2 cierres de caja (uno cuadra y otro tiene faltante), para que el historial y los reportes tengan qué mostrar. Todo queda marcado `demo: true`. `npm run seed:ventas-demo -- --borrar` elimina las ventas y los cierres de ejemplo. Los datos los define `scripts/datos-demo.mjs` y necesita las mismas credenciales de Google que los otros scripts.
