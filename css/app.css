@@ -140,43 +140,54 @@ img { border-radius: 0; }
 .btn--block { width: 100%; }
 .btn__arrow { width: 16px; height: 16px; flex: none; }
 
-/* ───────── Header de la app ───────── */
+/* ───────── Header de la app ─────────
+   Barra estilo carta de restaurante: la marca en serif, los enlaces en versalitas
+   con subrayado animado y una franja lago-palma arriba. En pantallas angostas el
+   menú se esconde detrás de un botón hamburguesa. Lo genera js/ui/header.js. */
 .app-header {
   position: sticky; top: 0; z-index: 100;
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(255, 255, 255, 0.94);
   backdrop-filter: saturate(1.4) blur(8px);
   border-bottom: 1px solid var(--steel);
 }
+.app-header::before { content: ""; display: block; height: 3px; background: var(--sweep); }
 .app-header__inner {
   display: flex; align-items: center; gap: var(--s-24);
   max-width: 1280px; margin-inline: auto;
-  padding: 12px var(--s-24);
+  padding: 10px var(--s-24);
 }
 .app-header__brand { display: flex; align-items: center; gap: var(--s-12); flex: none; }
-.app-header__brand img { width: 36px; height: 36px; object-fit: contain; }
+.app-header__brand img { width: 40px; height: 40px; object-fit: contain; }
 .app-header__brand span {
-  font-family: var(--font-display); font-weight: 500; font-size: 18px;
-  letter-spacing: -0.03em; line-height: 1;
+  font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+  font-weight: 600; font-size: 22px; letter-spacing: -0.01em; line-height: 1;
+  text-align: center;
 }
 .app-header__brand small {
   display: block; font-family: var(--font-mono); font-size: 11px; color: var(--slate);
-  letter-spacing: 0.04em; text-transform: uppercase; margin-top: 3px;
+  letter-spacing: 0.04em; text-transform: uppercase; margin-top: 4px;
 }
 
-.app-nav { display: flex; gap: var(--s-4); list-style: none; flex-wrap: wrap; }
+/* El <nav> agrupa los enlaces y el bloque del usuario (en móvil es el panel) */
+.app-header__inner > nav { display: flex; align-items: center; flex: 1; gap: var(--s-24); min-width: 0; }
+.app-nav { display: flex; gap: var(--s-24); list-style: none; }
 .app-nav a {
-  display: flex; align-items: center; gap: 6px;
-  padding: 8px 7px; border-radius: var(--r-link);
-  font-size: 14px; line-height: 1; color: var(--slate);
+  position: relative; display: block; padding: 10px 0;
+  font: 600 12.5px/1 var(--font-ui); letter-spacing: 0.09em; text-transform: uppercase;
+  color: var(--charcoal); white-space: nowrap;
 }
-.app-nav a::before {
-  content: ""; width: 8px; height: 8px; border-radius: 2px;
-  background: var(--steel); flex: none; transition: background-color 0.15s ease;
+.app-nav a::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 2px; height: 2px;
+  background: var(--accent); transform: scaleX(0); transform-origin: left;
+  transition: transform 0.25s ease;
 }
-.app-nav a:hover { color: var(--ink); }
-.app-nav a:hover::before { background: var(--slate); }
+.app-nav a:hover, .app-nav a:active, .app-nav a.app-nav__tocado { color: var(--ink); }
+/* El subrayado también sale al tocar (:active, y .app-nav__tocado que pone header.js un instante
+   antes de navegar) y con el teclado (:focus-visible), porque en el celular no existe el hover. */
+.app-nav a:hover::after, .app-nav a:active::after, .app-nav a:focus-visible::after,
+.app-nav a.app-nav__tocado::after { transform: scaleX(1); }
 .app-nav a[aria-current="page"] { color: var(--ink); }
-.app-nav a[aria-current="page"]::before { background: var(--signal); box-shadow: 0 0 0 1px var(--signal-dark); }
+.app-nav a[aria-current="page"]::after { background: var(--signal); transform: scaleX(1); }
 
 .app-user { display: flex; align-items: center; gap: var(--s-12); margin-left: auto; }
 .app-user__avatar {
@@ -187,6 +198,59 @@ img { border-radius: 0; }
 .app-user__info { display: flex; flex-direction: column; gap: 3px; line-height: 1; }
 .app-user__nombre { font-size: 13px; max-width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .app-user__rol { font: 400 11px/1 var(--font-mono); color: var(--slate); text-transform: uppercase; letter-spacing: 0.04em; }
+
+/* Botón hamburguesa: oculto en pantallas anchas */
+.app-header__toggle {
+  display: none; place-items: center; flex: none; width: 44px; height: 44px; margin-left: auto;
+  border: 0; border-radius: var(--r-btn); cursor: pointer;
+  background: var(--paper); box-shadow: inset 0 0 0 1px var(--steel);
+}
+.app-header__barras, .app-header__barras::before, .app-header__barras::after {
+  display: block; width: 20px; height: 2px; border-radius: 2px; background: var(--ink);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+.app-header__barras { position: relative; }
+.app-header__barras::before, .app-header__barras::after { content: ""; position: absolute; left: 0; }
+.app-header__barras::before { top: -6px; }
+.app-header__barras::after { top: 6px; }
+.app-header--abierto .app-header__barras { background: transparent; }
+.app-header--abierto .app-header__barras::before { transform: translateY(6px) rotate(45deg); }
+.app-header--abierto .app-header__barras::after { transform: translateY(-6px) rotate(-45deg); }
+
+/* De 1101 a 1280 px el menú cabe, pero sin el nombre del usuario */
+@media (max-width: 1280px) {
+  .app-user__info { display: none; }
+}
+
+/* Hasta 1100 px: menú hamburguesa. El <nav> pasa a ser un panel que baja del header. */
+@media (max-width: 1100px) {
+  .app-header__inner { padding: 8px var(--s-16); gap: var(--s-12); }
+  .app-header__toggle { display: grid; }
+  .app-header__inner > nav {
+    position: absolute; top: 100%; left: 0; right: 0;
+    flex-direction: column; align-items: stretch; gap: 0;
+    max-height: calc(100vh - 72px); max-height: calc(100dvh - 72px); overflow-y: auto;
+    padding: var(--s-8) var(--s-16) var(--s-24);
+    background: var(--paper); border-bottom: 1px solid var(--steel);
+    box-shadow: 0 24px 40px -16px rgba(13, 34, 64, 0.28);
+    visibility: hidden; opacity: 0; transform: translateY(-8px);
+    transition: opacity 0.18s ease, transform 0.18s ease, visibility 0s linear 0.18s;
+  }
+  .app-header--abierto .app-header__inner > nav {
+    visibility: visible; opacity: 1; transform: none; transition-delay: 0s;
+  }
+  .app-nav { flex-direction: column; gap: 0; }
+  .app-nav li + li { border-top: 1px solid var(--line-soft); }
+  /* Mismos enlaces que en escritorio (versalitas, subrayado al pasar el cursor y en el
+     activo); solo se agranda el área de toque y el subrayado mide lo que el texto. */
+  .app-nav a { width: fit-content; padding: 15px 0; font-size: 13.5px; }
+  .app-nav a::after { bottom: 10px; }
+  .app-user { margin: var(--s-16) 0 0; padding-top: var(--s-16); border-top: 1px solid var(--steel); }
+  .app-user__info { display: flex; }
+  .app-user .btn { margin-left: auto; }
+  body.menu-abierto { overflow: hidden; }
+  body.menu-abierto::after { content: ""; position: fixed; inset: 0; z-index: 90; background: rgba(13, 34, 64, 0.35); }
+}
 
 /* Mientras se verifica la sesión no se muestra el contenido protegido */
 body[data-auth="pendiente"] main { visibility: hidden; }
@@ -501,21 +565,7 @@ a.modulo:focus-visible { border-radius: var(--r-card); }
   .stat:nth-child(n + 3) { border-top: 1px solid var(--steel); }
 }
 
-/* Cuando el menú no cabe en una fila (el admin tiene 8 enlaces), el header pasa a
-   dos filas: marca y usuario arriba, menú abajo con desplazamiento horizontal. */
-@media (max-width: 1280px) {
-  .app-header__inner { flex-wrap: wrap; gap: var(--s-12) var(--s-24); }
-  .app-header__inner > nav { order: 3; width: 100%; }
-  .app-nav { overflow-x: auto; flex-wrap: nowrap; margin-inline: -7px; scrollbar-width: none; }
-  .app-nav a { white-space: nowrap; }
-}
-
 @media (max-width: 720px) {
-  .app-header__inner { padding: 10px var(--s-16); gap: var(--s-12); flex-wrap: wrap; }
-  .app-header__brand small, .app-user__info { display: none; }
-  .app-header__inner > nav { order: 3; width: 100%; }
-  .app-nav { overflow-x: auto; flex-wrap: nowrap; margin-inline: -10px; scrollbar-width: none; }
-  .app-nav a { white-space: nowrap; }
   .toolbar .input { flex-basis: 100%; }
   .toolbar .select { flex: 1 1 0; min-width: 0; }
   .modulo { min-height: 0; }

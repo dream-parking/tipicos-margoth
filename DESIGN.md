@@ -52,7 +52,7 @@ Neo Grotesk (referencia original) se sustituye por **Inter Tight**. Nunca usar I
 | Botón principal | `.btn.btn--primary` | Cerúleo con texto marino. Usar `.btn--lg` en formularios de acceso |
 | Botón secundario | `.btn.btn--secondary` | Azul marino con borde interior; "Salir", "Activar" |
 | Botón claro | `.btn.btn--light` | Blanco con anillo steel |
-| Header | `.app-header` (lo genera `js/ui/header.js`) | El ítem activo lleva un cuadrito cerúleo |
+| Header | `.app-header` (lo genera `js/ui/header.js`) | Estilo carta de restaurante: marca en Playfair Display, enlaces en versalitas con subrayado madera al pasar el cursor y cerúleo en el ítem activo, y una franja lago-palma arriba. Hasta 1100 px el menú se esconde tras un botón hamburguesa (`.app-header__toggle`) y baja como panel; entre 1101 y 1280 px se oculta el nombre del usuario para que quepan los 8 enlaces del admin |
 | Título de página | `.app-title` con `.eyebrow` + `h1` + `p` | Termina con una línea steel |
 | Indicadores | `.stats > .stat` | Celdas unidas por líneas finas; `.stat--alerta` agrega un punto madera |
 | Módulo del panel | `.modulo` + `--activo` / `--pronto` | Disponible = azul marino; en desarrollo = marfil |
