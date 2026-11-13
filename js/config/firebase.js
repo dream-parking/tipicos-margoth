@@ -3,9 +3,9 @@
 // privilegios. La seguridad real está en `firestore.rules`.
 import { initializeApp, deleteApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
 import {
-  getAuth,
   initializeAuth,
   inMemoryPersistence,
+  browserSessionPersistence,
   connectAuthEmulator,
 } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
 import { getFirestore, connectFirestoreEmulator } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
@@ -20,7 +20,9 @@ const firebaseConfig = {
 };
 
 export const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app);
+// La sesión vive solo mientras la pestaña esté abierta: al cerrarla, el sistema
+// vuelve a pedir correo y contraseña (por defecto Firebase la recordaría siempre).
+export const auth = initializeAuth(app, { persistence: browserSessionPersistence });
 export const db = getFirestore(app);
 
 // Modo desarrollo: en localhost, `localStorage.emulador = "1"` conecta la app a
